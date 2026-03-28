@@ -16,9 +16,10 @@
   --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--border3:rgba(255,255,255,0.2);
   --text:#f0f0f0;--text2:#999;--text3:#555;--text4:#333;
   --accent:#c8f060;--accent2:rgba(200,240,96,0.15);--accent3:rgba(200,240,96,0.08);
-  --radius:14px;--radius-sm:9px;--radius-xs:6px;
-  --safe-top:env(safe-area-inset-top,0px);
-  --safe-bot:env(safe-area-inset-bottom,0px);
+  --holiday:#f87171;--holiday2:rgba(248,113,113,0.15);
+  --restday:#60a5fa;--restday2:rgba(96,165,250,0.15);
+  --radius:16px;--radius-sm:11px;--radius-xs:7px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);
 }
 .theme-purple{--accent:#c084fc;--accent2:rgba(192,132,252,0.15);--accent3:rgba(192,132,252,0.08);}
 .theme-blue{--accent:#60a5fa;--accent2:rgba(96,165,250,0.15);--accent3:rgba(96,165,250,0.08);}
@@ -26,258 +27,228 @@
 .theme-pink{--accent:#f472b6;--accent2:rgba(244,114,182,0.15);--accent3:rgba(244,114,182,0.08);}
 .theme-teal{--accent:#2dd4bf;--accent2:rgba(45,212,191,0.15);--accent3:rgba(45,212,191,0.08);}
 .theme-red{--accent:#f87171;--accent2:rgba(248,113,113,0.15);--accent3:rgba(248,113,113,0.08);}
-.light-mode{
-  --bg:#f4f4ef;--surface:#fff;--surface2:#ebebE5;--surface3:#e0e0d8;
-  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);--border3:rgba(0,0,0,0.2);
-  --text:#111;--text2:#666;--text3:#aaa;--text4:#ccc;
-}
-.light-mode .theme-purple{--accent:#7c3aed;}
-.light-mode .theme-blue{--accent:#2563eb;}
-.light-mode .theme-orange{--accent:#ea580c;}
-.light-mode .theme-pink{--accent:#db2777;}
-.light-mode .theme-teal{--accent:#0d9488;}
-.light-mode .theme-red{--accent:#dc2626;}
-
+.light-mode{--bg:#f4f4ef;--surface:#fff;--surface2:#ebebE5;--surface3:#e0e0d8;--border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);--border3:rgba(0,0,0,0.2);--text:#111;--text2:#666;--text3:#aaa;--text4:#ccc;}
+.light-mode .theme-purple{--accent:#7c3aed;}.light-mode .theme-blue{--accent:#2563eb;}.light-mode .theme-orange{--accent:#ea580c;}.light-mode .theme-pink{--accent:#db2777;}.light-mode .theme-teal{--accent:#0d9488;}.light-mode .theme-red{--accent:#dc2626;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
-
-/* ── OVERLAYS ── */
 .overlay{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:var(--bg);}
 .overlay.hidden{display:none;}
-
-/* Language screen */
-.lang-screen{align-items:center;justify-content:center;gap:0;padding:40px 32px;}
-.lang-logo{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--accent);margin-bottom:6px;}
-.lang-sub{font-size:13px;color:var(--text2);margin-bottom:40px;}
-.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:340px;}
-.lang-btn{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px 16px;text-align:left;cursor:pointer;transition:all 0.15s;}
-.lang-btn:active{background:var(--surface2);}
-.lang-btn .lang-name{font-size:14px;font-weight:500;color:var(--text);display:block;}
-.lang-btn .lang-native{font-size:12px;color:var(--text2);display:block;margin-top:2px;}
+/* Language */
+.lang-logo{font-family:'DM Mono',monospace;font-size:34px;font-weight:500;color:var(--accent);margin-bottom:8px;}
+.lang-sub{font-size:15px;color:var(--text2);margin-bottom:36px;}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:360px;}
+.lang-btn{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:16px 18px;text-align:left;cursor:pointer;}
+.lang-btn .lang-name{font-size:16px;font-weight:500;color:var(--text);display:block;}
+.lang-btn .lang-native{font-size:13px;color:var(--text2);display:block;margin-top:2px;}
 .lang-btn.selected{border-color:var(--accent);background:var(--accent2);}
-
 /* Tutorial */
-.tutorial-screen{justify-content:flex-end;padding-bottom:0;}
 .tut-slides{flex:1;position:relative;overflow:hidden;}
 .tut-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;opacity:0;transform:translateX(60px);transition:all 0.4s cubic-bezier(.4,0,.2,1);pointer-events:none;}
 .tut-slide.active{opacity:1;transform:translateX(0);pointer-events:all;}
 .tut-slide.prev{opacity:0;transform:translateX(-60px);}
-.tut-icon{font-size:56px;margin-bottom:20px;}
-.tut-title{font-size:22px;font-weight:500;text-align:center;margin-bottom:10px;line-height:1.3;}
-.tut-desc{font-size:14px;color:var(--text2);text-align:center;line-height:1.7;max-width:300px;}
+.tut-icon{font-size:60px;margin-bottom:22px;}
+.tut-title{font-size:24px;font-weight:500;text-align:center;margin-bottom:12px;line-height:1.3;}
+.tut-desc{font-size:16px;color:var(--text2);text-align:center;line-height:1.75;max-width:300px;}
 .tut-preview{margin-top:24px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius);padding:16px;width:100%;max-width:320px;}
-.tut-preview-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);}
+.tut-preview-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border);}
 .tut-preview-row:last-child{border-bottom:none;}
-.tut-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;}
+.tut-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;}
 .tut-check.done{background:var(--accent);border-color:var(--accent);}
-.tut-txt{font-size:13px;color:var(--text2);}
-.color-swatches{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px;}
-.swatch{width:44px;height:44px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform 0.15s;}
-.swatch:active{transform:scale(0.9);}
+.tut-txt{font-size:15px;color:var(--text2);}
+.color-swatches{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px;}
+.swatch{width:50px;height:50px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform 0.15s;}
 .swatch.sel{border-color:var(--text);}
 .tut-bar{background:var(--surface);border-top:0.5px solid var(--border);padding:16px 24px;padding-bottom:calc(var(--safe-bot) + 16px);}
-.tut-dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px;}
-.tut-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all 0.2s;}
-.tut-dot.active{width:20px;background:var(--accent);}
-.tut-actions{display:flex;gap:10px;}
-.tut-skip{flex:1;background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:13px;font-size:14px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.tut-next{flex:2;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:13px;font-size:14px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;}
-
-/* ── MAIN APP ── */
+.tut-dots{display:flex;justify-content:center;gap:7px;margin-bottom:16px;}
+.tut-dot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all 0.2s;}
+.tut-dot.active{width:22px;background:var(--accent);}
+.tut-actions{display:flex;gap:10px;align-items:center;}
+.tut-back{background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px 16px;font-size:18px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;flex-shrink:0;}
+.tut-skip{flex:1;background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px;font-size:15px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.tut-next{flex:2;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:14px;font-size:15px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;}
+/* App */
 .app{display:flex;flex-direction:column;height:100dvh;max-width:430px;margin:0 auto;}
 .header{padding:calc(var(--safe-top) + 14px) 20px 0;}
 .header-row{display:flex;align-items:center;justify-content:space-between;}
-.app-logo{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:0.05em;}
+.app-logo{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--accent);letter-spacing:0.05em;}
 .header-right{display:flex;align-items:center;gap:8px;}
-.today-chip{font-size:11px;color:var(--accent);background:var(--accent2);border:none;border-radius:20px;padding:4px 11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.score-chip{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);background:var(--surface);border:0.5px solid var(--border2);border-radius:20px;padding:4px 11px;}
-
+.today-chip{font-size:14px;color:var(--accent);background:var(--accent2);border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.score-chip{font-family:'DM Mono',monospace;font-size:14px;color:var(--text2);background:var(--surface);border:0.5px solid var(--border2);border-radius:20px;padding:6px 14px;}
 .tabs{display:flex;margin:12px 20px 0;background:var(--surface);border-radius:var(--radius);border:0.5px solid var(--border);overflow:hidden;}
-.tab{flex:1;padding:10px 6px;text-align:center;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.tab{flex:1;padding:12px 6px;text-align:center;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
 .tab.active{background:var(--surface2);color:var(--text);}
-
-.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px;padding-bottom:calc(var(--safe-bot) + 84px);}
-.view{display:none;padding-top:16px;}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 20px;padding-bottom:calc(var(--safe-bot) + 90px);}
+.view{display:none;padding-top:18px;}
 .view.active{display:block;}
-
-/* ── CALENDAR ── */
-.cal-view-tabs{display:flex;gap:6px;margin-bottom:14px;}
-.cv-tab{font-size:12px;color:var(--text2);background:var(--surface);border:0.5px solid var(--border);border-radius:20px;padding:5px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+/* Calendar */
+.cal-view-tabs{display:flex;gap:8px;margin-bottom:16px;}
+.cv-tab{font-size:14px;color:var(--text2);background:var(--surface);border:0.5px solid var(--border);border-radius:20px;padding:8px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .cv-tab.active{background:var(--accent2);color:var(--accent);border-color:var(--accent);}
-
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.cal-period{font-size:17px;font-weight:500;}
-.nav-btn{background:var(--surface);border:0.5px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;}
-
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.cal-period{font-size:20px;font-weight:500;}
+.nav-btn{background:var(--surface);border:0.5px solid var(--border);color:var(--text2);width:38px;height:38px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px;}
-.cal-dow{text-align:center;font-size:10px;color:var(--text3);padding:0 0 7px;font-family:'DM Mono',monospace;}
-.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5px;border-radius:9px;cursor:pointer;border:0.5px solid transparent;transition:background 0.1s;}
+.cal-dow{text-align:center;font-size:13px;color:var(--text3);padding:0 0 8px;font-family:'DM Mono',monospace;}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:11px;cursor:pointer;border:0.5px solid transparent;transition:background 0.1s;}
 .cal-day.empty{cursor:default;}
 .cal-day.selected{background:var(--surface2);border-color:var(--border2);}
 .cal-day.today .day-num{color:var(--accent);font-weight:500;}
-.day-num{font-size:12px;color:var(--text2);line-height:1;}
-.day-pip{width:4px;height:4px;border-radius:50%;background:var(--text4);margin-top:3px;}
-.day-pip.on{background:var(--accent);}
-
-/* Week view */
+.cal-day.holiday{background:var(--holiday2);}
+.cal-day.holiday .day-num{color:var(--holiday);}
+.cal-day.restday{background:var(--restday2);}
+.cal-day.restday .day-num{color:var(--restday);}
+.day-num{font-size:15px;color:var(--text2);line-height:1;}
+.day-marker{font-size:9px;margin-top:2px;line-height:1;}
+/* Week */
 .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px;}
 .week-col{display:flex;flex-direction:column;align-items:center;gap:4px;}
-.wk-dow{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;padding-bottom:4px;}
-.wk-day{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text2);cursor:pointer;border:0.5px solid transparent;}
+.wk-dow{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;padding-bottom:4px;}
+.wk-day{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text2);cursor:pointer;border:0.5px solid transparent;}
 .wk-day.today{color:var(--accent);}
 .wk-day.selected{background:var(--accent2);border-color:var(--accent);color:var(--accent);}
+.wk-day.holiday{background:var(--holiday2);color:var(--holiday);}
+.wk-day.restday{background:var(--restday2);color:var(--restday);}
 .wk-events{display:flex;flex-direction:column;gap:3px;width:100%;}
-.wk-ev{background:var(--accent2);border-radius:4px;padding:3px 5px;font-size:10px;color:var(--accent);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-
-/* Year view */
+.wk-ev{background:var(--accent2);border-radius:4px;padding:3px 5px;font-size:11px;color:var(--accent);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+/* Year */
 .year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
 .year-month{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 8px;cursor:pointer;}
 .year-month:active{background:var(--surface2);}
-.ym-name{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:6px;font-family:'DM Mono',monospace;}
+.ym-name{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:6px;font-family:'DM Mono',monospace;}
 .ym-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;}
 .ym-d{aspect-ratio:1;border-radius:2px;font-size:7px;display:flex;align-items:center;justify-content:center;color:var(--text3);}
 .ym-d.today{background:var(--accent);color:#0f0f0f;border-radius:50%;}
 .ym-d.has{background:var(--accent3);}
-
-.day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.day-full{font-size:14px;font-weight:500;}
-.day-pts{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);background:var(--accent2);padding:3px 10px;border-radius:20px;}
-
-.section-lbl{font-size:10px;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;font-family:'DM Mono',monospace;margin:14px 0 7px;}
-
-.task-list{display:flex;flex-direction:column;gap:5px;}
-.task-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 12px;cursor:pointer;transition:opacity 0.2s;}
+/* Day section */
+.day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+.day-full{font-size:17px;font-weight:500;}
+.day-pts{font-family:'DM Mono',monospace;font-size:14px;color:var(--accent);background:var(--accent2);padding:5px 13px;border-radius:20px;}
+.day-flags{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.day-flag-btn{font-size:13px;padding:6px 14px;border-radius:20px;border:0.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.day-flag-btn.holiday-on{background:var(--holiday2);border-color:var(--holiday);color:var(--holiday);}
+.day-flag-btn.restday-on{background:var(--restday2);border-color:var(--restday);color:var(--restday);}
+.section-lbl{font-size:12px;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;font-family:'DM Mono',monospace;margin:16px 0 8px;}
+.task-list{display:flex;flex-direction:column;gap:6px;}
+.task-item{display:flex;align-items:center;gap:12px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:14px;cursor:pointer;transition:opacity 0.2s;}
 .task-item.done{opacity:0.42;}
 .task-item.done .task-text{text-decoration:line-through;}
-.check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.check{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .task-item.done .check{background:var(--accent);border-color:var(--accent);}
-.ck-mark{display:none;font-size:10px;color:#0f0f0f;font-weight:700;}
+.ck-mark{display:none;font-size:12px;color:#0f0f0f;font-weight:700;}
 .task-item.done .ck-mark{display:block;}
-.task-text{font-size:14px;flex:1;line-height:1.4;}
-.task-badge{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--accent2);color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;}
+.task-text{font-size:16px;flex:1;line-height:1.4;}
+.task-badge{font-size:12px;padding:3px 9px;border-radius:20px;background:var(--accent2);color:var(--accent);font-family:'DM Mono',monospace;flex-shrink:0;}
 .task-badge.daily{background:var(--surface2);color:var(--text3);}
-.task-del{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0;}
-
-/* ── OBJECTIVES ── */
-.obj-date-strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none;}
+.task-del{background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer;padding:0 2px;flex-shrink:0;}
+/* Objectives */
+.obj-date-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none;}
 .obj-date-strip::-webkit-scrollbar{display:none;}
-.date-chip{flex-shrink:0;background:var(--surface);border:0.5px solid var(--border);border-radius:22px;padding:6px 14px;font-size:12px;color:var(--text2);cursor:pointer;}
+.date-chip{flex-shrink:0;background:var(--surface);border:0.5px solid var(--border);border-radius:22px;padding:8px 16px;font-size:15px;color:var(--text2);cursor:pointer;white-space:nowrap;}
 .date-chip.active{background:var(--accent2);border-color:var(--accent);color:var(--accent);}
-
-.score-bar-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:14px;}
-.score-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
-.score-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--accent);}
-.score-label{font-size:12px;color:var(--text2);}
-.score-bar{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;}
-.score-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s cubic-bezier(.4,0,.2,1);}
-
-/* Objective items with drag */
-.obj-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:5px;transition:opacity 0.2s;}
+.score-bar-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:16px;}
+.score-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.score-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--accent);}
+.score-label{font-size:15px;color:var(--text2);}
+.score-bar{height:7px;background:var(--surface2);border-radius:4px;overflow:hidden;}
+.score-fill{height:100%;background:var(--accent);border-radius:4px;transition:width 0.4s cubic-bezier(.4,0,.2,1);}
+.obj-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:6px;transition:opacity 0.2s;}
 .obj-item.done{opacity:0.4;}
 .obj-item.done .obj-text{text-decoration:line-through;}
-.obj-item.dragging{opacity:0.3;}
-.drag-handle{color:var(--text3);font-size:16px;cursor:grab;flex-shrink:0;touch-action:none;user-select:none;}
-.obj-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.obj-arrows{display:flex;flex-direction:column;gap:1px;flex-shrink:0;}
+.arr-btn{background:none;border:0.5px solid var(--border);border-radius:5px;color:var(--text2);font-size:14px;cursor:pointer;line-height:1;padding:3px 6px;font-family:'DM Sans',sans-serif;background:var(--surface2);}
+.arr-btn:active{background:var(--accent2);color:var(--accent);}
+.arr-btn:disabled{opacity:0.2;cursor:default;}
+.obj-check{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .obj-item.done .obj-check{background:var(--accent);border-color:var(--accent);}
-.obj-ck-mark{display:none;font-size:10px;color:#0f0f0f;font-weight:700;}
+.obj-ck-mark{display:none;font-size:12px;color:#0f0f0f;font-weight:700;}
 .obj-item.done .obj-ck-mark{display:block;}
 .obj-text-wrap{flex:1;min-width:0;}
-.obj-text{font-size:14px;line-height:1.4;word-break:break-word;}
-.obj-days{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1px;}
+.obj-text{font-size:15px;line-height:1.4;word-break:break-word;}
+.obj-days{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2px;}
 .obj-actions{display:flex;gap:4px;flex-shrink:0;}
-.obj-edit-btn,.obj-del-btn{background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:3px;}
-
-/* Edit modal */
+.obj-edit-btn,.obj-del-btn{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:4px;}
+/* Modal */
 .modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.6);display:flex;align-items:flex-end;}
 .modal-backdrop.hidden{display:none;}
-.modal-sheet{background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;padding:20px;padding-bottom:calc(var(--safe-bot) + 20px);width:100%;max-width:430px;margin:0 auto;}
-.modal-title{font-size:15px;font-weight:500;margin-bottom:16px;}
-.modal-input{width:100%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:11px 14px;font-size:14px;color:var(--text);outline:none;font-family:'DM Sans',sans-serif;margin-bottom:12px;}
-.modal-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;font-family:'DM Mono',monospace;margin-bottom:8px;}
-.days-row{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
-.day-toggle{width:36px;height:36px;border-radius:50%;border:0.5px solid var(--border2);background:var(--surface2);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;}
+.modal-sheet{background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;padding:24px;padding-bottom:calc(var(--safe-bot) + 24px);width:100%;max-width:430px;margin:0 auto;}
+.modal-title{font-size:18px;font-weight:500;margin-bottom:18px;}
+.modal-input{width:100%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px 16px;font-size:16px;color:var(--text);outline:none;font-family:'DM Sans',sans-serif;margin-bottom:14px;}
+.modal-label{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;font-family:'DM Mono',monospace;margin-bottom:10px;}
+.days-row{display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.day-toggle{width:40px;height:40px;border-radius:50%;border:0.5px solid var(--border2);background:var(--surface2);color:var(--text2);font-size:14px;cursor:pointer;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;}
 .day-toggle.on{background:var(--accent2);border-color:var(--accent);color:var(--accent);}
-.modal-actions{display:flex;gap:8px;}
-.modal-cancel{flex:1;background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:12px;font-size:14px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
-.modal-save{flex:2;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:12px;font-size:14px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;}
-
-/* ── SETTINGS ── */
-.settings-section{margin-bottom:24px;}
-.settings-title{font-size:10px;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:10px;}
+.deselect-all-btn{font-size:13px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:18px;text-decoration:underline;padding:0;}
+.modal-actions{display:flex;gap:10px;margin-top:4px;}
+.modal-cancel{flex:1;background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px;font-size:15px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.modal-save{flex:2;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:14px;font-size:15px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;}
+/* Settings */
+.settings-section{margin-bottom:26px;}
+.settings-title{font-size:12px;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:10px;}
 .settings-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);}
-.setting-row{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:0.5px solid var(--border);}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:0.5px solid var(--border);}
 .setting-row:last-child{border-bottom:none;}
-.setting-name{font-size:14px;}
-.setting-val{font-size:13px;color:var(--text2);}
-.setting-btn{background:none;border:none;color:var(--text2);font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:right;}
-
-.color-row{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px;}
-.color-opt{width:34px;height:34px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform 0.15s;}
+.setting-name{font-size:16px;}
+.setting-btn{background:none;border:none;color:var(--text2);font-size:16px;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:right;}
+.color-row{display:flex;gap:12px;flex-wrap:wrap;padding:16px 18px;}
+.color-opt{width:38px;height:38px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform 0.15s;}
 .color-opt:active{transform:scale(0.88);}
 .color-opt.active{border-color:var(--text);}
-
-.lang-select-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px;}
-.lang-opt{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-xs);padding:9px 12px;font-size:13px;color:var(--text2);cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;}
+.lang-select-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px;}
+.lang-opt{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-xs);padding:12px 14px;font-size:15px;color:var(--text2);cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;}
 .lang-opt.active{border-color:var(--accent);color:var(--accent);background:var(--accent2);}
-
-.donate-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:15px;font-size:15px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;}
-
-.total-score-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:14px;}
-.ts-num{font-family:'DM Mono',monospace;font-size:36px;font-weight:500;color:var(--accent);}
-.ts-lbl{font-size:12px;color:var(--text2);margin-top:4px;}
-.ts-sub{font-size:11px;color:var(--text3);margin-top:2px;}
-
-/* ── ADD BAR ── */
-.add-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);border-top:0.5px solid var(--border);padding:10px 20px;padding-bottom:calc(var(--safe-bot) + 10px);display:flex;gap:8px;align-items:center;}
-.add-input{flex:1;background:var(--surface);border:0.5px solid var(--border);border-radius:22px;padding:10px 16px;font-size:14px;color:var(--text);outline:none;font-family:'DM Sans',sans-serif;}
+.donate-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:18px;font-size:17px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;}
+.total-score-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-bottom:16px;}
+.ts-num{font-family:'DM Mono',monospace;font-size:44px;font-weight:500;color:var(--accent);}
+.ts-lbl{font-size:15px;color:var(--text2);margin-top:4px;}
+.ts-sub{font-size:13px;color:var(--text3);margin-top:2px;}
+/* Add bar */
+.add-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);border-top:0.5px solid var(--border);padding:12px 20px;padding-bottom:calc(var(--safe-bot) + 12px);display:flex;gap:10px;align-items:center;}
+.add-input{flex:1;background:var(--surface);border:0.5px solid var(--border);border-radius:26px;padding:13px 18px;font-size:16px;color:var(--text);outline:none;font-family:'DM Sans',sans-serif;}
 .add-input::placeholder{color:var(--text3);}
 .add-input:focus{border-color:var(--border2);}
-.add-btn{background:var(--accent);border:none;border-radius:50%;width:40px;height:40px;font-size:22px;color:#0f0f0f;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:300;}
-
-.empty-state{text-align:center;padding:28px 0;color:var(--text3);font-size:13px;}
+.add-btn{background:var(--accent);border:none;border-radius:50%;width:46px;height:46px;font-size:26px;color:#0f0f0f;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:300;}
+.empty-state{text-align:center;padding:32px 0;color:var(--text3);font-size:16px;}
 </style>
 </head>
 <body>
 
-<!-- LANGUAGE SCREEN -->
 <div class="overlay" id="langScreen">
-  <div class="lang-screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px 28px;">
     <div class="lang-logo">dayflow</div>
-    <div class="lang-sub" id="langSubtitle">Choose your language</div>
+    <div class="lang-sub">Choose your language / Elige tu idioma</div>
     <div class="lang-grid" id="langGrid"></div>
-    <button onclick="finishLang()" style="margin-top:24px;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:14px 48px;font-size:15px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;">
-      <span id="langContinueBtn">Continue</span>
+    <button onclick="finishLang()" style="margin-top:28px;background:var(--accent);border:none;border-radius:var(--radius-sm);padding:17px 54px;font-size:17px;font-weight:500;color:#0f0f0f;cursor:pointer;font-family:'DM Sans',sans-serif;">
+      Continuar / Continue
     </button>
   </div>
 </div>
 
-<!-- TUTORIAL SCREEN -->
 <div class="overlay hidden" id="tutScreen">
   <div class="tut-slides" id="tutSlides"></div>
   <div class="tut-bar">
     <div class="tut-dots" id="tutDots"></div>
     <div class="tut-actions">
+      <button class="tut-back" onclick="prevTutSlide()" id="tutBackBtn">←</button>
       <button class="tut-skip" onclick="skipTutorial()" id="tutSkipBtn">Saltar</button>
       <button class="tut-next" onclick="nextTutSlide()" id="tutNextBtn">Siguiente →</button>
     </div>
   </div>
 </div>
 
-<!-- EDIT OBJECTIVE MODAL -->
 <div class="modal-backdrop hidden" id="editModal">
   <div class="modal-sheet">
     <div class="modal-title" id="editModalTitle">Editar objetivo</div>
-    <input class="modal-input" id="editModalInput" placeholder="Nombre de la tarea..."/>
+    <input class="modal-input" id="editModalInput" placeholder="Nombre..."/>
     <div class="modal-label" id="editModalDaysLabel">Días activos</div>
     <div class="days-row" id="editModalDays"></div>
+    <button class="deselect-all-btn" id="deselectAllBtn" onclick="deselectAllDays()">Deseleccionar todos</button>
     <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeEditModal()">Cancelar</button>
-      <button class="modal-save" onclick="saveEditModal()">Guardar</button>
+      <button class="modal-cancel" onclick="closeEditModal()" id="modalCancelBtn">Cancelar</button>
+      <button class="modal-save" onclick="saveEditModal()" id="modalSaveBtn">Guardar</button>
     </div>
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div class="app" id="mainApp" style="display:none;">
   <div class="header">
     <div class="header-row">
@@ -295,13 +266,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <button class="tab" onclick="switchTab('cfg')" id="tab-cfg">Ajustes</button>
   </div>
   <div class="content">
-
-    <!-- CALENDAR -->
     <div class="view active" id="view-cal">
       <div class="cal-view-tabs">
-        <button class="cv-tab active" onclick="setCalView('week')" id="cvt-week" data-tkey="week">Semana</button>
-        <button class="cv-tab" onclick="setCalView('month')" id="cvt-month" data-tkey="month">Mes</button>
-        <button class="cv-tab" onclick="setCalView('year')" id="cvt-year" data-tkey="year">Año</button>
+        <button class="cv-tab active" onclick="setCalView('week')" id="cvt-week">Semana</button>
+        <button class="cv-tab" onclick="setCalView('month')" id="cvt-month">Mes</button>
+        <button class="cv-tab" onclick="setCalView('year')" id="cvt-year">Año</button>
       </div>
       <div class="cal-nav">
         <button class="nav-btn" onclick="calNav(-1)">‹</button>
@@ -311,8 +280,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       <div id="calBody"></div>
       <div id="daySectionCal"></div>
     </div>
-
-    <!-- OBJECTIVES -->
     <div class="view" id="view-obj">
       <div class="obj-date-strip" id="objStrip"></div>
       <div class="score-bar-wrap">
@@ -323,10 +290,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
         <div class="score-bar"><div class="score-fill" id="objScoreFill" style="width:0%"></div></div>
       </div>
       <div id="objList"></div>
-      <button onclick="openNewObj()" style="width:100%;background:var(--surface);border:0.5px dashed var(--border2);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;" id="addObjBtn">+ Nuevo objetivo diario</button>
+      <button onclick="openNewObj()" style="width:100%;background:var(--surface);border:0.5px dashed var(--border2);border-radius:var(--radius-sm);padding:15px;font-size:15px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;" id="addObjBtn">+ Nuevo objetivo diario</button>
     </div>
-
-    <!-- STATS / POINTS -->
     <div class="view" id="view-stats">
       <div class="total-score-card">
         <div class="ts-num" id="totalScoreNum">0</div>
@@ -335,8 +300,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       </div>
       <div id="statsGrid"></div>
     </div>
-
-    <!-- SETTINGS -->
     <div class="view" id="view-cfg">
       <div class="settings-section">
         <div class="settings-title" id="cfgTitleAppearance">Apariencia</div>
@@ -345,9 +308,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
             <span class="setting-name" id="cfgDarkMode">Modo oscuro</span>
             <button class="setting-btn" onclick="toggleDark()" id="darkModeBtn">Activado</button>
           </div>
-          <div style="border-bottom:0.5px solid var(--border);padding:10px 16px;">
-            <div style="font-size:13px;margin-bottom:10px;" id="cfgAccentColor">Color de acento</div>
-            <div class="color-row" style="padding:0;flex-wrap:wrap;">
+          <div style="border-bottom:0.5px solid var(--border);padding:14px 18px;">
+            <div style="font-size:16px;margin-bottom:12px;" id="cfgAccentColor">Color de acento</div>
+            <div class="color-row" style="padding:0;">
               <div class="color-opt active" style="background:#c8f060;" onclick="setTheme('green')" id="co-green"></div>
               <div class="color-opt" style="background:#c084fc;" onclick="setTheme('purple')" id="co-purple"></div>
               <div class="color-opt" style="background:#60a5fa;" onclick="setTheme('blue')" id="co-blue"></div>
@@ -361,12 +324,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       </div>
       <div class="settings-section">
         <div class="settings-title" id="cfgTitleLanguage">Idioma</div>
-        <div class="settings-card">
-          <div class="lang-select-row" id="settingsLangGrid"></div>
-        </div>
+        <div class="settings-card"><div class="lang-select-row" id="settingsLangGrid"></div></div>
       </div>
       <div class="settings-section">
-        <div class="settings-title" id="cfgTitleScore">Puntuación</div>
+        <div class="settings-title">Puntuación</div>
         <div class="settings-card">
           <div class="setting-row">
             <span class="setting-name" id="cfgResetScore">Reiniciar puntos</span>
@@ -376,13 +337,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       </div>
       <div class="settings-section">
         <div class="settings-title" id="cfgTitleSupport">Soporte</div>
-        <button class="donate-btn" onclick="openDonate()">
-          ♥ <span id="donateBtnText">Apoyar con donación</span>
-        </button>
-        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;" id="donateSubText">Redirige a PayPal · Opcional y voluntario</p>
+        <button class="donate-btn" onclick="openDonate()">♥ <span id="donateBtnText">Apoyar con donación</span></button>
+        <p style="font-size:13px;color:var(--text3);text-align:center;margin-top:8px;" id="donateSubText">Redirige a PayPal · Opcional</p>
       </div>
     </div>
-
   </div>
   <div class="add-bar" id="addBar">
     <input class="add-input" id="taskInput" placeholder="Nueva tarea..." onkeydown="if(event.key==='Enter')addCalTask()"/>
@@ -391,629 +349,225 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 </div>
 
 <script>
-// ══════════════════════════════════════════
-// TRANSLATIONS
-// ══════════════════════════════════════════
-const LANGS = {
-  es:{name:'Español',native:'Español',
-    t:{
-      week:'Semana',month:'Mes',year:'Año',today:'Hoy',
-      daily:'diaria',thisDay:'Este día',
-      objectives:'Objetivos',points:'Puntos',settings:'Ajustes',calendar:'Calendario',
-      dailyTasks:'Tareas diarias',dayTasks:'Del día',
-      addTask:'Nueva tarea...',addObj:'+ Nuevo objetivo diario',
-      totalPoints:'Puntos totales',accumulated:'Acumulados desde siempre',
-      appearance:'Apariencia',darkMode:'Modo oscuro',accentColor:'Color de acento',
-      language:'Idioma',support:'Soporte',
-      donate:'Apoyar con donación',donateSub:'Redirige a PayPal · Opcional y voluntario',
-      on:'Activado',off:'Desactivado',
-      resetScore:'Reiniciar puntos',reset:'Reiniciar',
-      editObj:'Editar objetivo',newObj:'Nuevo objetivo',
-      objName:'Nombre de la tarea...',activeDays:'Días activos',
-      cancel:'Cancelar',save:'Guardar',
-      Mon:'L',Tue:'M',Wed:'X',Thu:'J',Fri:'V',Sat:'S',Sun:'D',
-      months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-      monthsS:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-      daysLong:['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],
-      noTasks:'Sin tareas — añade una abajo',
-      ptsDay:'pts hoy',
-      skip:'Saltar',next:'Siguiente →',finish:'Empezar',
-      tutContinue:'Continuar',
-    }
-  },
-  en:{name:'English',native:'English',
-    t:{
-      week:'Week',month:'Month',year:'Year',today:'Today',
-      daily:'daily',thisDay:'This day',
-      objectives:'Goals',points:'Points',settings:'Settings',calendar:'Calendar',
-      dailyTasks:'Daily tasks',dayTasks:'Today\'s tasks',
-      addTask:'New task...',addObj:'+ New daily goal',
-      totalPoints:'Total points',accumulated:'Accumulated forever',
-      appearance:'Appearance',darkMode:'Dark mode',accentColor:'Accent color',
-      language:'Language',support:'Support',
-      donate:'Support with a donation',donateSub:'Redirects to PayPal · Optional',
-      on:'On',off:'Off',
-      resetScore:'Reset points',reset:'Reset',
-      editObj:'Edit goal',newObj:'New goal',
-      objName:'Task name...',activeDays:'Active days',
-      cancel:'Cancel',save:'Save',
-      Mon:'M',Tue:'T',Wed:'W',Thu:'T',Fri:'F',Sat:'S',Sun:'S',
-      months:['January','February','March','April','May','June','July','August','September','October','November','December'],
-      monthsS:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      daysLong:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-      noTasks:'No tasks — add one below',
-      ptsDay:'pts today',
-      skip:'Skip',next:'Next →',finish:'Start',
-      tutContinue:'Continue',
-    }
-  },
-  fr:{name:'Français',native:'Français',
-    t:{
-      week:'Semaine',month:'Mois',year:'Année',today:"Aujourd'hui",
-      daily:'quotidien',thisDay:'Ce jour',
-      objectives:'Objectifs',points:'Points',settings:'Réglages',calendar:'Calendrier',
-      dailyTasks:'Tâches quotidiennes',dayTasks:'Du jour',
-      addTask:'Nouvelle tâche...',addObj:'+ Nouvel objectif',
-      totalPoints:'Points totaux',accumulated:'Accumulés',
-      appearance:'Apparence',darkMode:'Mode sombre',accentColor:"Couleur d'accent",
-      language:'Langue',support:'Soutien',
-      donate:'Soutenir par don',donateSub:'Redirige vers PayPal · Optionnel',
-      on:'Activé',off:'Désactivé',
-      resetScore:'Réinitialiser les points',reset:'Réinitialiser',
-      editObj:'Modifier objectif',newObj:'Nouvel objectif',
-      objName:'Nom de la tâche...',activeDays:'Jours actifs',
-      cancel:'Annuler',save:'Enregistrer',
-      Mon:'L',Tue:'M',Wed:'M',Thu:'J',Fri:'V',Sat:'S',Sun:'D',
-      months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-      monthsS:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
-      daysLong:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-      noTasks:'Aucune tâche',
-      ptsDay:'pts auj.',
-      skip:'Passer',next:'Suivant →',finish:'Commencer',tutContinue:'Continuer',
-    }
-  },
-  de:{name:'Deutsch',native:'Deutsch',
-    t:{
-      week:'Woche',month:'Monat',year:'Jahr',today:'Heute',
-      daily:'täglich',thisDay:'Diesen Tag',
-      objectives:'Ziele',points:'Punkte',settings:'Einstellungen',calendar:'Kalender',
-      dailyTasks:'Tägliche Aufgaben',dayTasks:'Heutige Aufgaben',
-      addTask:'Neue Aufgabe...',addObj:'+ Neues Tagesziel',
-      totalPoints:'Gesamtpunkte',accumulated:'Insgesamt',
-      appearance:'Aussehen',darkMode:'Dunkelmodus',accentColor:'Akzentfarbe',
-      language:'Sprache',support:'Unterstützung',
-      donate:'Mit Spende unterstützen',donateSub:'Weiterleitung zu PayPal · Optional',
-      on:'An',off:'Aus',
-      resetScore:'Punkte zurücksetzen',reset:'Zurücksetzen',
-      editObj:'Ziel bearbeiten',newObj:'Neues Ziel',
-      objName:'Aufgabenname...',activeDays:'Aktive Tage',
-      cancel:'Abbrechen',save:'Speichern',
-      Mon:'Mo',Tue:'Di',Wed:'Mi',Thu:'Do',Fri:'Fr',Sat:'Sa',Sun:'So',
-      months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
-      monthsS:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
-      daysLong:['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],
-      noTasks:'Keine Aufgaben',
-      ptsDay:'Pkt. heute',
-      skip:'Überspringen',next:'Weiter →',finish:'Starten',tutContinue:'Weiter',
-    }
-  },
-  pt:{name:'Português',native:'Português',
-    t:{
-      week:'Semana',month:'Mês',year:'Ano',today:'Hoje',
-      daily:'diária',thisDay:'Neste dia',
-      objectives:'Objetivos',points:'Pontos',settings:'Ajustes',calendar:'Calendário',
-      dailyTasks:'Tarefas diárias',dayTasks:'Do dia',
-      addTask:'Nova tarefa...',addObj:'+ Novo objetivo diário',
-      totalPoints:'Pontos totais',accumulated:'Acumulados',
-      appearance:'Aparência',darkMode:'Modo escuro',accentColor:'Cor de destaque',
-      language:'Idioma',support:'Suporte',
-      donate:'Apoiar com doação',donateSub:'Redireciona para PayPal · Opcional',
-      on:'Ativado',off:'Desativado',
-      resetScore:'Reiniciar pontos',reset:'Reiniciar',
-      editObj:'Editar objetivo',newObj:'Novo objetivo',
-      objName:'Nome da tarefa...',activeDays:'Dias ativos',
-      cancel:'Cancelar',save:'Salvar',
-      Mon:'S',Tue:'T',Wed:'Q',Thu:'Q',Fri:'S',Sat:'S',Sun:'D',
-      months:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-      monthsS:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-      daysLong:['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-      noTasks:'Sem tarefas',
-      ptsDay:'pts hoje',
-      skip:'Pular',next:'Próximo →',finish:'Começar',tutContinue:'Continuar',
-    }
-  },
-  it:{name:'Italiano',native:'Italiano',
-    t:{
-      week:'Settimana',month:'Mese',year:'Anno',today:'Oggi',
-      daily:'quotidiana',thisDay:'Questo giorno',
-      objectives:'Obiettivi',points:'Punti',settings:'Impostazioni',calendar:'Calendario',
-      dailyTasks:'Attività quotidiane',dayTasks:'Del giorno',
-      addTask:'Nuova attività...',addObj:'+ Nuovo obiettivo',
-      totalPoints:'Punti totali',accumulated:'Accumulati',
-      appearance:'Aspetto',darkMode:'Modalità scura',accentColor:'Colore accento',
-      language:'Lingua',support:'Supporto',
-      donate:'Supporta con donazione',donateSub:'Reindirizza a PayPal · Opzionale',
-      on:'Attivo',off:'Disattivo',
-      resetScore:'Azzera punti',reset:'Azzera',
-      editObj:'Modifica obiettivo',newObj:'Nuovo obiettivo',
-      objName:'Nome attività...',activeDays:'Giorni attivi',
-      cancel:'Annulla',save:'Salva',
-      Mon:'L',Tue:'M',Wed:'M',Thu:'G',Fri:'V',Sat:'S',Sun:'D',
-      months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
-      monthsS:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
-      daysLong:['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'],
-      noTasks:'Nessuna attività',
-      ptsDay:'punti oggi',
-      skip:'Salta',next:'Avanti →',finish:'Inizia',tutContinue:'Continua',
-    }
-  },
-  zh:{name:'中文',native:'中文',
-    t:{
-      week:'周',month:'月',year:'年',today:'今天',
-      daily:'每日',thisDay:'当天',
-      objectives:'目标',points:'积分',settings:'设置',calendar:'日历',
-      dailyTasks:'每日任务',dayTasks:'当天任务',
-      addTask:'新任务...',addObj:'+ 新建每日目标',
-      totalPoints:'总积分',accumulated:'累计总分',
-      appearance:'外观',darkMode:'深色模式',accentColor:'强调色',
-      language:'语言',support:'支持',
-      donate:'捐款支持',donateSub:'跳转到 PayPal · 可选',
-      on:'开启',off:'关闭',
-      resetScore:'重置积分',reset:'重置',
-      editObj:'编辑目标',newObj:'新建目标',
-      objName:'任务名称...',activeDays:'活跃日',
-      cancel:'取消',save:'保存',
-      Mon:'一',Tue:'二',Wed:'三',Thu:'四',Fri:'五',Sat:'六',Sun:'日',
-      months:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-      monthsS:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-      daysLong:['周一','周二','周三','周四','周五','周六','周日'],
-      noTasks:'无任务',
-      ptsDay:'分今天',
-      skip:'跳过',next:'下一步 →',finish:'开始',tutContinue:'继续',
-    }
-  }
-};
+const LANGS={es:{name:'Español',native:'Español',t:{week:'Semana',month:'Mes',year:'Año',today:'Hoy',daily:'diaria',thisDay:'Este día',objectives:'Objetivos',points:'Puntos',settings:'Ajustes',calendar:'Calendario',dailyTasks:'Tareas diarias',dayTasks:'Del día',addTask:'Nueva tarea...',addObj:'+ Nuevo objetivo diario',totalPoints:'Puntos totales',accumulated:'Acumulados desde siempre',appearance:'Apariencia',darkMode:'Modo oscuro',accentColor:'Color de acento',language:'Idioma',support:'Soporte',donate:'Apoyar con donación',donateSub:'Redirige a PayPal · Opcional y voluntario',on:'Activado',off:'Desactivado',resetScore:'Reiniciar puntos',reset:'Reiniciar',editObj:'Editar objetivo',newObj:'Nuevo objetivo',objName:'Nombre de la tarea...',activeDays:'Días activos',cancel:'Cancelar',save:'Guardar',Mon:'L',Tue:'M',Wed:'X',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthsS:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],daysLong:['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],noTasks:'Sin tareas — añade una abajo',skip:'Saltar',next:'Siguiente →',finish:'Empezar',back:'←',deselectAll:'Deseleccionar todos',holiday:'Fiesta',restday:'Descanso',markHoliday:'🎉 Día festivo',markRest:'😴 Día de descanso'}},en:{name:'English',native:'English',t:{week:'Week',month:'Month',year:'Year',today:'Today',daily:'daily',thisDay:'This day',objectives:'Goals',points:'Points',settings:'Settings',calendar:'Calendar',dailyTasks:'Daily tasks',dayTasks:"Today's",addTask:'New task...',addObj:'+ New daily goal',totalPoints:'Total points',accumulated:'Accumulated forever',appearance:'Appearance',darkMode:'Dark mode',accentColor:'Accent color',language:'Language',support:'Support',donate:'Support with donation',donateSub:'Redirects to PayPal · Optional',on:'On',off:'Off',resetScore:'Reset points',reset:'Reset',editObj:'Edit goal',newObj:'New goal',objName:'Task name...',activeDays:'Active days',cancel:'Cancel',save:'Save',Mon:'M',Tue:'T',Wed:'W',Thu:'T',Fri:'F',Sat:'S',Sun:'S',months:['January','February','March','April','May','June','July','August','September','October','November','December'],monthsS:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],daysLong:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],noTasks:'No tasks — add one below',skip:'Skip',next:'Next →',finish:'Start',back:'←',deselectAll:'Deselect all',holiday:'Holiday',restday:'Rest day',markHoliday:'🎉 Holiday',markRest:'😴 Rest day'}},fr:{name:'Français',native:'Français',t:{week:'Semaine',month:'Mois',year:'Année',today:"Aujourd'hui",daily:'quotidien',thisDay:'Ce jour',objectives:'Objectifs',points:'Points',settings:'Réglages',calendar:'Calendrier',dailyTasks:'Tâches quotidiennes',dayTasks:'Du jour',addTask:'Nouvelle tâche...',addObj:'+ Nouvel objectif',totalPoints:'Points totaux',accumulated:'Accumulés',appearance:'Apparence',darkMode:'Mode sombre',accentColor:"Couleur d'accent",language:'Langue',support:'Soutien',donate:'Soutenir par don',donateSub:'Redirige vers PayPal',on:'Activé',off:'Désactivé',resetScore:'Réinitialiser',reset:'Réinitialiser',editObj:'Modifier',newObj:'Nouvel objectif',objName:'Nom...',activeDays:'Jours actifs',cancel:'Annuler',save:'Enregistrer',Mon:'L',Tue:'M',Wed:'M',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],monthsS:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],daysLong:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],noTasks:'Aucune tâche',skip:'Passer',next:'Suivant →',finish:'Commencer',back:'←',deselectAll:'Tout désélectionner',holiday:'Fête',restday:'Repos',markHoliday:'🎉 Jour férié',markRest:'😴 Repos'}},de:{name:'Deutsch',native:'Deutsch',t:{week:'Woche',month:'Monat',year:'Jahr',today:'Heute',daily:'täglich',thisDay:'Heute',objectives:'Ziele',points:'Punkte',settings:'Einstellungen',calendar:'Kalender',dailyTasks:'Aufgaben',dayTasks:'Heute',addTask:'Neue Aufgabe...',addObj:'+ Neues Ziel',totalPoints:'Gesamtpunkte',accumulated:'Insgesamt',appearance:'Aussehen',darkMode:'Dunkelmodus',accentColor:'Akzentfarbe',language:'Sprache',support:'Unterstützung',donate:'Mit Spende unterstützen',donateSub:'Weiterleitung zu PayPal',on:'An',off:'Aus',resetScore:'Zurücksetzen',reset:'Zurücksetzen',editObj:'Bearbeiten',newObj:'Neues Ziel',objName:'Name...',activeDays:'Aktive Tage',cancel:'Abbrechen',save:'Speichern',Mon:'Mo',Tue:'Di',Wed:'Mi',Thu:'Do',Fri:'Fr',Sat:'Sa',Sun:'So',months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],monthsS:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],daysLong:['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],noTasks:'Keine Aufgaben',skip:'Überspringen',next:'Weiter →',finish:'Starten',back:'←',deselectAll:'Alle abwählen',holiday:'Feiertag',restday:'Ruhetag',markHoliday:'🎉 Feiertag',markRest:'😴 Ruhetag'}},pt:{name:'Português',native:'Português',t:{week:'Semana',month:'Mês',year:'Ano',today:'Hoje',daily:'diária',thisDay:'Neste dia',objectives:'Objetivos',points:'Pontos',settings:'Ajustes',calendar:'Calendário',dailyTasks:'Tarefas diárias',dayTasks:'Do dia',addTask:'Nova tarefa...',addObj:'+ Novo objetivo',totalPoints:'Pontos totais',accumulated:'Acumulados',appearance:'Aparência',darkMode:'Modo escuro',accentColor:'Cor destaque',language:'Idioma',support:'Suporte',donate:'Apoiar com doação',donateSub:'Redireciona para PayPal',on:'Ativado',off:'Desativado',resetScore:'Reiniciar',reset:'Reiniciar',editObj:'Editar',newObj:'Novo objetivo',objName:'Nome...',activeDays:'Dias ativos',cancel:'Cancelar',save:'Salvar',Mon:'S',Tue:'T',Wed:'Q',Thu:'Q',Fri:'S',Sat:'S',Sun:'D',months:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],monthsS:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],daysLong:['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],noTasks:'Sem tarefas',skip:'Pular',next:'Próximo →',finish:'Começar',back:'←',deselectAll:'Desmarcar todos',holiday:'Feriado',restday:'Descanso',markHoliday:'🎉 Feriado',markRest:'😴 Descanso'}},it:{name:'Italiano',native:'Italiano',t:{week:'Settimana',month:'Mese',year:'Anno',today:'Oggi',daily:'quotidiana',thisDay:'Questo giorno',objectives:'Obiettivi',points:'Punti',settings:'Impostazioni',calendar:'Calendario',dailyTasks:'Attività quotidiane',dayTasks:'Del giorno',addTask:'Nuova attività...',addObj:'+ Nuovo obiettivo',totalPoints:'Punti totali',accumulated:'Accumulati',appearance:'Aspetto',darkMode:'Modalità scura',accentColor:'Colore accento',language:'Lingua',support:'Supporto',donate:'Supporta con donazione',donateSub:'Reindirizza a PayPal',on:'Attivo',off:'Disattivo',resetScore:'Azzera punti',reset:'Azzera',editObj:'Modifica',newObj:'Nuovo obiettivo',objName:'Nome...',activeDays:'Giorni attivi',cancel:'Annulla',save:'Salva',Mon:'L',Tue:'M',Wed:'M',Thu:'G',Fri:'V',Sat:'S',Sun:'D',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],monthsS:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],daysLong:['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'],noTasks:'Nessuna attività',skip:'Salta',next:'Avanti →',finish:'Inizia',back:'←',deselectAll:'Deseleziona tutti',holiday:'Festivo',restday:'Riposo',markHoliday:'🎉 Giorno festivo',markRest:'😴 Giorno di riposo'}},zh:{name:'中文',native:'中文',t:{week:'周',month:'月',year:'年',today:'今天',daily:'每日',thisDay:'当天',objectives:'目标',points:'积分',settings:'设置',calendar:'日历',dailyTasks:'每日任务',dayTasks:'当天',addTask:'新任务...',addObj:'+ 新建每日目标',totalPoints:'总积分',accumulated:'累计总分',appearance:'外观',darkMode:'深色模式',accentColor:'强调色',language:'语言',support:'支持',donate:'捐款支持',donateSub:'跳转到 PayPal',on:'开启',off:'关闭',resetScore:'重置积分',reset:'重置',editObj:'编辑',newObj:'新建目标',objName:'任务名称...',activeDays:'活跃日',cancel:'取消',save:'保存',Mon:'一',Tue:'二',Wed:'三',Thu:'四',Fri:'五',Sat:'六',Sun:'日',months:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],monthsS:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],daysLong:['周一','周二','周三','周四','周五','周六','周日'],noTasks:'无任务',skip:'跳过',next:'下一步 →',finish:'开始',back:'←',deselectAll:'取消全选',holiday:'节假日',restday:'休息日',markHoliday:'🎉 节假日',markRest:'😴 休息日'}}};
 
-// ══════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════
 function ld(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+let lang=ld('lang',detectLang());
+let isDark=ld('isDark',true);
+let themeColor=ld('themeColor','green');
+let calView=ld('calView','month');
+let calTasks=ld('calTasks',{});
+let objectives=ld('objectives',[{id:'o1',text:'',days:[0,1,2,3,4,5,6]},{id:'o2',text:'',days:[0,1,2,3,4,5,6]}]);
+let completions=ld('completions',{});
+let totalScore=ld('totalScore',0);
+let specialDays=ld('specialDays',{});
+let now=new Date();
+let todayKey=fmt(now);
+let selectedDate=todayKey;
+let viewYear=now.getFullYear(),viewMonth=now.getMonth(),viewWeekStart=getWeekStart(now);
+let activeTab='cal',editingObjId=null,tutSlide=0;
+const TUT_COUNT=6;
+let tutTmpTheme=themeColor;
 
-let lang = ld('lang', detectLang());
-let isDark = ld('isDark', true);
-let themeColor = ld('themeColor', 'green');
-let calView = ld('calView','month');
-let calTasks = ld('calTasks',{});
-let objectives = ld('objectives',[
-  {id:'o1',text:'',days:[0,1,2,3,4,5,6]},
-  {id:'o2',text:'',days:[0,1,2,3,4,5,6]}
-]);
-let completions = ld('completions',{});
-let totalScore = ld('totalScore',0);
-let now = new Date();
-let todayKey = fmt(now);
-let selectedDate = todayKey;
-let viewYear = now.getFullYear();
-let viewMonth = now.getMonth();
-let viewWeekStart = getWeekStart(now);
-let activeTab = 'cal';
-let editingObjId = null;
-let tutSlide = 0;
-const TUT_COUNT = 6;
-let tutTmpTheme = themeColor;
-
-function detectLang(){
-  const nl = (navigator.language||'en').slice(0,2).toLowerCase();
-  return LANGS[nl]?nl:'en';
-}
-function T(k){return (LANGS[lang]&&LANGS[lang].t[k])||k;}
-function fmt(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function detectLang(){const nl=(navigator.language||'en').slice(0,2).toLowerCase();return LANGS[nl]?nl:'en';}
+function T(k){return(LANGS[lang]&&LANGS[lang].t[k])||k;}
+function fmt(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function parseKey(k){const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d);}
 function getWeekStart(d){const dd=new Date(d);const day=(dd.getDay()+6)%7;dd.setDate(dd.getDate()-day);return dd;}
-function persist(){sv('calTasks',calTasks);sv('completions',completions);sv('objectives',objectives);sv('totalScore',totalScore);sv('lang',lang);sv('isDark',isDark);sv('themeColor',themeColor);sv('calView',calView);}
+function persist(){sv('calTasks',calTasks);sv('completions',completions);sv('objectives',objectives);sv('totalScore',totalScore);sv('lang',lang);sv('isDark',isDark);sv('themeColor',themeColor);sv('calView',calView);sv('specialDays',specialDays);}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-// ══════════════════════════════════════════
-// ONBOARDING - init objectives texts
-// ══════════════════════════════════════════
 function initObjTexts(){
-  if(!objectives[0].text) objectives[0].text = lang==='en'?'Check emails':lang==='fr'?'Vérifier les emails':lang==='de'?'E-Mails prüfen':lang==='pt'?'Verificar emails':lang==='it'?'Controlla email':lang==='zh'?'查看邮件':'Revisar correos';
-  if(!objectives[1].text) objectives[1].text = lang==='en'?'Plan the day':lang==='fr'?'Planifier la journée':lang==='de'?'Tag planen':lang==='pt'?'Planejar o dia':lang==='it'?'Pianifica la giornata':lang==='zh'?'规划今天':'Planificar el día';
+  if(!objectives[0].text)objectives[0].text=lang==='en'?'Check emails':lang==='fr'?'Vérifier les emails':lang==='de'?'E-Mails prüfen':lang==='pt'?'Verificar emails':lang==='it'?'Controlla email':lang==='zh'?'查看邮件':'Revisar correos';
+  if(!objectives[1].text)objectives[1].text=lang==='en'?'Plan the day':lang==='fr'?'Planifier la journée':lang==='de'?'Tag planen':lang==='pt'?'Planejar o dia':lang==='it'?'Pianifica la giornata':lang==='zh'?'规划今天':'Planificar el día';
   sv('objectives',objectives);
 }
 
-// ══════════════════════════════════════════
-// LANGUAGE SCREEN
-// ══════════════════════════════════════════
+// ── LANG SCREEN ──
 function renderLangScreen(){
-  document.getElementById('langSubtitle').textContent = 'Choose your language / Elige tu idioma';
-  const grid = document.getElementById('langGrid');
-  grid.innerHTML = Object.keys(LANGS).map(k=>`
-    <button class="lang-btn${lang===k?' selected':''}" onclick="selectLang('${k}')">
-      <span class="lang-name">${LANGS[k].name}</span>
-      <span class="lang-native">${LANGS[k].native}</span>
-    </button>`).join('');
-  document.getElementById('langContinueBtn').textContent = 'Continuar / Continue';
+  document.getElementById('langGrid').innerHTML=Object.keys(LANGS).map(k=>`<button class="lang-btn${lang===k?' selected':''}" onclick="selectLang('${k}')"><span class="lang-name">${LANGS[k].name}</span><span class="lang-native">${LANGS[k].native}</span></button>`).join('');
 }
+function selectLang(l){lang=l;document.querySelectorAll('.lang-btn').forEach((b,i)=>{b.classList.toggle('selected',Object.keys(LANGS)[i]===l);});}
+function finishLang(){sv('lang',lang);initObjTexts();const firstTime=!ld('tutDone',false);document.getElementById('langScreen').classList.add('hidden');if(firstTime){buildTutorial();document.getElementById('tutScreen').classList.remove('hidden');}else launchApp();}
 
-function selectLang(l){
-  lang=l;
-  document.querySelectorAll('.lang-btn').forEach((b,i)=>{
-    b.classList.toggle('selected', Object.keys(LANGS)[i]===l);
-  });
-}
-
-function finishLang(){
-  sv('lang',lang);
-  initObjTexts();
-  const firstTime = !ld('tutDone',false);
-  document.getElementById('langScreen').classList.add('hidden');
-  if(firstTime){
-    buildTutorial();
-    document.getElementById('tutScreen').classList.remove('hidden');
-  } else {
-    launchApp();
-  }
-}
-
-// ══════════════════════════════════════════
-// TUTORIAL
-// ══════════════════════════════════════════
-const THEMES_LIST = ['green','purple','blue','orange','pink','teal','red'];
-const THEME_COLORS = {green:'#c8f060',purple:'#c084fc',blue:'#60a5fa',orange:'#fb923c',pink:'#f472b6',teal:'#2dd4bf',red:'#f87171'};
+// ── TUTORIAL ──
+const THEMES_LIST=['green','purple','blue','orange','pink','teal','red'];
+const THEME_COLORS={green:'#c8f060',purple:'#c084fc',blue:'#60a5fa',orange:'#fb923c',pink:'#f472b6',teal:'#2dd4bf',red:'#f87171'};
 
 function buildTutorial(){
-  const slides = [
-    {icon:'👋',title:T('week'),content:null, custom:'welcome'},
-    {icon:'📅',title:'',content:null, custom:'cal'},
-    {icon:'✅',title:'',content:null, custom:'obj'},
-    {icon:'🎨',title:'',content:null, custom:'colors'},
-    {icon:'🏆',title:'',content:null, custom:'score'},
-    {icon:'🚀',title:'',content:null, custom:'ready'},
-  ];
-
-  const titles_es = ['¡Bienvenido a Dayflow!','El Calendario','Objetivos Diarios','Personaliza los colores','Sistema de puntuación','¡Todo listo!'];
-  const titles_en = ['Welcome to Dayflow!','The Calendar','Daily Goals','Customize colors','Scoring system','All set!'];
-  const titlesMap = {es:titles_es,en:titles_en,fr:['Bienvenue !','Le Calendrier','Objectifs quotidiens','Personnaliser','Système de points','C\'est parti !'],de:['Willkommen!','Kalender','Tagesziele','Farben','Punktesystem','Los geht\'s!'],pt:['Bem-vindo!','O Calendário','Objetivos','Personalizar','Sistema de pontos','Pronto!'],it:['Benvenuto!','Il Calendario','Obiettivi','Colori','Punteggio','Pronti!'],zh:['欢迎使用！','日历','每日目标','自定义颜色','积分系统','准备好了！']};
-  const descs_es = [
-    'Tu calendario personal + lista de objetivos con sistema de puntuación. Vamos a darte un tour rápido.',
-    'Navega por semana, mes o año. Toca cualquier día para ver y añadir tareas.',
-    'Tus objetivos diarios aparecen cada día automáticamente. Márcalos completados y gana puntos.',
-    'Elige el color que más te guste. La interfaz cambia al instante.',
-    'Cada día valen 100 puntos. Completa todos tus objetivos para conseguirlos.',
-    '¡Empieza a organizar tu día con Dayflow!'
-  ];
-  const descs_en = [
-    'Your personal calendar + goals list with a scoring system. Let\'s give you a quick tour.',
-    'Browse by week, month or year. Tap any day to view and add tasks.',
-    'Your daily goals appear every day automatically. Check them off to earn points.',
-    'Choose your favorite color. The interface changes instantly.',
-    'Each day is worth 100 points. Complete all your goals to earn them.',
-    'Start organizing your day with Dayflow!'
-  ];
-  const descMap = {es:descs_es,en:descs_en};
-  const getDescs = ()=> descMap[lang]||descs_en;
-  const getTitles = ()=> titlesMap[lang]||titlesMap.en;
-
-  const container = document.getElementById('tutSlides');
-  container.innerHTML = '';
+  const titlesMap={es:['¡Bienvenido a Dayflow!','El Calendario','Objetivos Diarios','Personaliza los colores','Sistema de puntuación','¡Todo listo!'],en:['Welcome to Dayflow!','The Calendar','Daily Goals','Customize colors','Scoring system','All set!'],fr:['Bienvenue !','Le Calendrier','Objectifs','Couleurs','Points',"C'est parti !"],de:['Willkommen!','Kalender','Ziele','Farben','Punkte','Los!'],pt:['Bem-vindo!','Calendário','Objetivos','Cores','Pontos','Pronto!'],it:['Benvenuto!','Calendario','Obiettivi','Colori','Punti','Pronti!'],zh:['欢迎！','日历','目标','颜色','积分','开始！']};
+  const descsMap={es:['Tu calendario personal con objetivos diarios y sistema de puntuación.','Navega por semana, mes o año. Toca cualquier día para ver y añadir tareas.','Tus objetivos diarios aparecen cada día. Márcalos y gana puntos.','Elige el color que más te guste. Cambia al instante.','Cada día vale 100 puntos. Completa todos tus objetivos para conseguirlos.','¡Empieza a organizar tu día!'],en:['Your personal calendar with daily goals and a scoring system.','Browse by week, month or year. Tap any day to add tasks.','Daily goals appear every day. Check them off to earn points.','Pick your favorite color. Changes instantly.','Each day is worth 100 points. Complete all goals to earn them.','Start organizing your day!']};
+  const getTitles=()=>titlesMap[lang]||titlesMap.en;
+  const getDescs=()=>descsMap[lang]||descsMap.en;
+  const icons=['👋','📅','✅','🎨','🏆','🚀'];
+  const container=document.getElementById('tutSlides');
+  container.innerHTML='';
   for(let i=0;i<TUT_COUNT;i++){
-    const div = document.createElement('div');
-    div.className = 'tut-slide'+(i===0?' active':'');
-    div.id='ts'+i;
-    let inner = `<div class="tut-icon">${['👋','📅','✅','🎨','🏆','🚀'][i]}</div>
-      <div class="tut-title">${getTitles()[i]}</div>
-      <div class="tut-desc">${getDescs()[i]}</div>`;
-
-    if(i===1){ // Calendar preview
-      inner += `<div class="tut-preview" style="padding:12px;">
-        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">
-          ${['L','M','X','J','V','S','D'].map(d=>`<div style="text-align:center;font-size:10px;color:var(--text3);padding:3px 0;">${d}</div>`).join('')}
-          ${Array.from({length:31},(_,i)=>`<div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:11px;border-radius:6px;${i===14?'background:var(--accent);color:#0f0f0f;':i===16?'background:var(--surface2);color:var(--text2);':'color:var(--text3);'}">${i+1}</div>`).join('')}
-        </div></div>`;
-    }
-    if(i===2){ // Objectives preview
-      inner += `<div class="tut-preview">
-        ${['Revisar correos','Planificar el día','Hacer ejercicio'].map((t,j)=>`
-        <div class="tut-preview-row">
-          <div class="tut-check${j<2?' done':''}"></div>
-          <div class="tut-txt${j<2?' done':''}" style="${j<2?'text-decoration:line-through;opacity:0.5':''}">${t}</div>
-        </div>`).join('')}
-      </div>`;
-    }
-    if(i===3){ // Color swatches
-      inner += `<div class="color-swatches" id="tutSwatches">
-        ${THEMES_LIST.map(t=>`<div class="swatch${t===tutTmpTheme?' sel':''}" style="background:${THEME_COLORS[t]};" onclick="tutPickTheme('${t}')"></div>`).join('')}
-      </div>
-      <div id="tutColorPreview" style="margin-top:16px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:12px 16px;width:100%;max-width:280px;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);"></div>
-          <span style="font-size:13px;">Dayflow</span>
-          <span style="margin-left:auto;font-size:11px;padding:2px 8px;background:var(--accent2);color:var(--accent);border-radius:10px;">activo</span>
-        </div>
-      </div>`;
-    }
-    if(i===4){ // Score preview
-      inner += `<div class="tut-preview">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
-          <span style="font-family:'DM Mono',monospace;font-size:24px;color:var(--accent);">75</span>
-          <span style="font-size:12px;color:var(--text2);">/ 100 pts</span>
-        </div>
-        <div style="height:5px;background:var(--surface2);border-radius:3px;">
-          <div style="width:75%;height:100%;background:var(--accent);border-radius:3px;"></div>
-        </div>
-        <div style="font-size:11px;color:var(--text3);margin-top:8px;">3 de 4 objetivos completados hoy</div>
-      </div>`;
-    }
-    div.innerHTML = inner;
-    container.appendChild(div);
+    const div=document.createElement('div');div.className='tut-slide'+(i===0?' active':'');div.id='ts'+i;
+    let inner=`<div class="tut-icon">${icons[i]}</div><div class="tut-title">${getTitles()[i]}</div><div class="tut-desc">${getDescs()[i]}</div>`;
+    if(i===1)inner+=`<div class="tut-preview" style="padding:12px;"><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">${['L','M','X','J','V','S','D'].map(d=>`<div style="text-align:center;font-size:12px;color:var(--text3);padding:3px 0;">${d}</div>`).join('')}${Array.from({length:31},(_,j)=>`<div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:7px;${j===14?'background:var(--accent);color:#0f0f0f;':j===16?'background:var(--surface2);color:var(--text2);':'color:var(--text3);'}">${j+1}</div>`).join('')}</div></div>`;
+    if(i===2)inner+=`<div class="tut-preview">${['Revisar correos','Planificar el día','Hacer ejercicio'].map((t,j)=>`<div class="tut-preview-row"><div class="tut-check${j<2?' done':''}"></div><div class="tut-txt" style="${j<2?'text-decoration:line-through;opacity:0.5':''}">${t}</div></div>`).join('')}</div>`;
+    if(i===3)inner+=`<div class="color-swatches" id="tutSwatches">${THEMES_LIST.map(t=>`<div class="swatch${t===tutTmpTheme?' sel':''}" style="background:${THEME_COLORS[t]};" onclick="tutPickTheme('${t}')"></div>`).join('')}</div><div style="margin-top:16px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:14px 18px;width:100%;max-width:280px;"><div style="display:flex;align-items:center;gap:10px;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);"></div><span style="font-size:16px;">Dayflow</span><span style="margin-left:auto;font-size:13px;padding:4px 10px;background:var(--accent2);color:var(--accent);border-radius:10px;">activo</span></div></div>`;
+    if(i===4)inner+=`<div class="tut-preview"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;"><span style="font-family:'DM Mono',monospace;font-size:28px;color:var(--accent);">75</span><span style="font-size:15px;color:var(--text2);">/ 100 pts</span></div><div style="height:7px;background:var(--surface2);border-radius:4px;"><div style="width:75%;height:100%;background:var(--accent);border-radius:4px;"></div></div><div style="font-size:13px;color:var(--text3);margin-top:10px;">3 de 4 objetivos completados</div></div>`;
+    div.innerHTML=inner;container.appendChild(div);
   }
-  renderTutDots();
-  document.getElementById('tutSkipBtn').textContent = T('skip');
-  document.getElementById('tutNextBtn').textContent = T('next');
+  renderTutDots();updateTutButtons();
 }
-
-function tutPickTheme(t){
-  tutTmpTheme = t;
-  setTheme(t, true);
-  document.querySelectorAll('.swatch').forEach((s,i)=>{
-    s.classList.toggle('sel', THEMES_LIST[i]===t);
-  });
+function tutPickTheme(t){tutTmpTheme=t;setTheme(t,true);document.querySelectorAll('.swatch').forEach((s,i)=>{s.classList.toggle('sel',THEMES_LIST[i]===t);});}
+function renderTutDots(){document.getElementById('tutDots').innerHTML=Array.from({length:TUT_COUNT},(_,i)=>`<div class="tut-dot${i===tutSlide?' active':''}"></div>`).join('');}
+function updateTutButtons(){
+  document.getElementById('tutSkipBtn').textContent=T('skip');
+  document.getElementById('tutNextBtn').textContent=tutSlide===TUT_COUNT-1?T('finish'):T('next');
+  document.getElementById('tutBackBtn').textContent=T('back');
+  document.getElementById('tutBackBtn').style.display=tutSlide===0?'none':'';
+  document.getElementById('tutSkipBtn').style.display=tutSlide===TUT_COUNT-1?'none':'';
 }
-
-function renderTutDots(){
-  const c = document.getElementById('tutDots');
-  c.innerHTML = Array.from({length:TUT_COUNT},(_,i)=>`<div class="tut-dot${i===tutSlide?' active':''}"></div>`).join('');
+function prevTutSlide(){
+  if(tutSlide<=0)return;
+  document.getElementById('ts'+tutSlide).classList.remove('active');
+  tutSlide--;
+  const el=document.getElementById('ts'+tutSlide);el.classList.remove('prev');el.classList.add('active');
+  renderTutDots();updateTutButtons();
 }
-
 function nextTutSlide(){
-  if(tutSlide >= TUT_COUNT-1){ finishTutorial(); return; }
+  if(tutSlide>=TUT_COUNT-1){finishTutorial();return;}
   document.getElementById('ts'+tutSlide).classList.remove('active');
   document.getElementById('ts'+tutSlide).classList.add('prev');
-  tutSlide++;
-  document.getElementById('ts'+tutSlide).classList.add('active');
-  renderTutDots();
-  if(tutSlide === TUT_COUNT-1){
-    document.getElementById('tutNextBtn').textContent = T('finish');
-    document.getElementById('tutSkipBtn').style.display = 'none';
-  }
+  tutSlide++;document.getElementById('ts'+tutSlide).classList.add('active');
+  renderTutDots();updateTutButtons();
 }
+function skipTutorial(){finishTutorial();}
+function finishTutorial(){themeColor=tutTmpTheme;sv('themeColor',themeColor);sv('tutDone',true);document.getElementById('tutScreen').classList.add('hidden');launchApp();}
 
-function skipTutorial(){ finishTutorial(); }
-function finishTutorial(){
-  themeColor = tutTmpTheme;
-  sv('themeColor',themeColor);
-  sv('tutDone',true);
-  document.getElementById('tutScreen').classList.add('hidden');
-  launchApp();
-}
-
-// ══════════════════════════════════════════
-// LAUNCH APP
-// ══════════════════════════════════════════
-function launchApp(){
-  applyTheme();
-  document.getElementById('mainApp').style.display='flex';
-  renderAll();
-}
-
+// ── LAUNCH ──
+function launchApp(){applyTheme();document.getElementById('mainApp').style.display='flex';renderAll();}
 function applyTheme(){
-  const body = document.body;
-  body.classList.toggle('light-mode', !isDark);
-  THEMES_LIST.forEach(t=> body.classList.remove('theme-'+t));
-  if(themeColor!=='green') body.classList.add('theme-'+themeColor);
-  document.querySelectorAll('.color-opt').forEach(el=>{
-    el.classList.toggle('active', el.id==='co-'+themeColor);
-  });
-  document.getElementById('darkModeBtn') && (document.getElementById('darkModeBtn').textContent = isDark?T('on'):T('off'));
-  updateMetaTheme();
+  const body=document.body;body.classList.toggle('light-mode',!isDark);
+  THEMES_LIST.forEach(t=>body.classList.remove('theme-'+t));
+  if(themeColor!=='green')body.classList.add('theme-'+themeColor);
+  document.querySelectorAll('.color-opt').forEach(el=>{el.classList.toggle('active',el.id==='co-'+themeColor);});
+  const db=document.getElementById('darkModeBtn');if(db)db.textContent=isDark?T('on'):T('off');
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=isDark?'#0f0f0f':'#f4f4ef';
 }
+function setTheme(t,preview=false){themeColor=t;if(!preview)sv('themeColor',t);applyTheme();}
+function toggleDark(){isDark=!isDark;sv('isDark',isDark);applyTheme();renderSettings();}
 
-function updateMetaTheme(){
-  const m = document.querySelector('meta[name="theme-color"]');
-  if(m) m.content = isDark?'#0f0f0f':'#f4f4ef';
-}
-
-function setTheme(t, preview=false){
-  themeColor = t;
-  if(!preview){ sv('themeColor',t); }
-  applyTheme();
-}
-
-function toggleDark(){
-  isDark = !isDark;
-  sv('isDark',isDark);
-  applyTheme();
-}
-
-// ══════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════
+// ── TABS ──
 function switchTab(t){
-  activeTab = t;
-  ['cal','obj','stats','cfg'].forEach(id=>{
-    document.getElementById('tab-'+id).classList.toggle('active', id===t);
-    document.getElementById('view-'+id).classList.toggle('active', id===t);
-  });
-  document.getElementById('addBar').style.display = (t==='cfg'||t==='stats')?'none':'flex';
-  document.getElementById('taskInput').placeholder = t==='obj'?T('addTask'):T('addTask');
+  activeTab=t;
+  ['cal','obj','stats','cfg'].forEach(id=>{document.getElementById('tab-'+id).classList.toggle('active',id===t);document.getElementById('view-'+id).classList.toggle('active',id===t);});
+  document.getElementById('addBar').style.display=(t==='cfg'||t==='stats')?'none':'flex';
   renderAll();
 }
+function goToday(){now=new Date();todayKey=fmt(now);selectedDate=todayKey;viewYear=now.getFullYear();viewMonth=now.getMonth();viewWeekStart=getWeekStart(now);if(activeTab!=='cal')switchTab('cal');else renderAll();}
 
-function goToday(){
-  now = new Date(); todayKey = fmt(now); selectedDate = todayKey;
-  viewYear=now.getFullYear(); viewMonth=now.getMonth(); viewWeekStart=getWeekStart(now);
-  if(activeTab!=='cal') switchTab('cal');
-  else renderAll();
-}
+// ── SPECIAL DAYS ──
+function toggleSpecialDay(date,type){specialDays[date]=(specialDays[date]===type)?null:type;persist();renderAll();}
+function isHoliday(k){return specialDays[k]==='holiday';}
+function isRestDay(k){return specialDays[k]==='restday';}
 
-// ══════════════════════════════════════════
-// CALENDAR
-// ══════════════════════════════════════════
-function setCalView(v){ calView=v; sv('calView',v); ['week','month','year'].forEach(x=>document.getElementById('cvt-'+x).classList.toggle('active',x===v)); renderCal(); }
+// ── CALENDAR ──
+function setCalView(v){calView=v;sv('calView',v);['week','month','year'].forEach(x=>document.getElementById('cvt-'+x).classList.toggle('active',x===v));renderCal();}
 function calNav(d){
   if(calView==='month'){viewMonth+=d;if(viewMonth>11){viewMonth=0;viewYear++;}if(viewMonth<0){viewMonth=11;viewYear--;}}
   else if(calView==='year'){viewYear+=d;}
   else{const dd=new Date(viewWeekStart);dd.setDate(dd.getDate()+d*7);viewWeekStart=dd;}
   renderCal();
 }
-
 function renderCal(){
-  const lbl = document.getElementById('calPeriodLabel');
-  const body = document.getElementById('calBody');
-  if(calView==='month'){
-    lbl.textContent=`${T('months')[viewMonth]} ${viewYear}`;
-    body.innerHTML=renderMonthGrid();
-  } else if(calView==='week'){
-    const we=new Date(viewWeekStart);we.setDate(we.getDate()+6);
-    lbl.textContent=`${viewWeekStart.getDate()} ${T('monthsS')[viewWeekStart.getMonth()]} — ${we.getDate()} ${T('monthsS')[we.getMonth()]}`;
-    body.innerHTML=renderWeekGrid();
-  } else {
-    lbl.textContent=`${viewYear}`;
-    body.innerHTML=renderYearGrid();
-  }
+  document.getElementById('cvt-week').textContent=T('week');document.getElementById('cvt-month').textContent=T('month');document.getElementById('cvt-year').textContent=T('year');
+  const lbl=document.getElementById('calPeriodLabel'),body=document.getElementById('calBody');
+  if(calView==='month'){lbl.textContent=`${T('months')[viewMonth]} ${viewYear}`;body.innerHTML=renderMonthGrid();}
+  else if(calView==='week'){const we=new Date(viewWeekStart);we.setDate(we.getDate()+6);lbl.textContent=`${viewWeekStart.getDate()} ${T('monthsS')[viewWeekStart.getMonth()]} — ${we.getDate()} ${T('monthsS')[we.getMonth()]}`;body.innerHTML=renderWeekGrid();}
+  else{lbl.textContent=`${viewYear}`;body.innerHTML=renderYearGrid();}
   renderDaySectionCal();
 }
-
 function renderMonthGrid(){
   const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   let h=`<div class="cal-grid">${dow.map(d=>`<div class="cal-dow">${T(d)}</div>`).join('')}`;
-  const first=new Date(viewYear,viewMonth,1);
-  const startDow=(first.getDay()+6)%7;
-  const days=new Date(viewYear,viewMonth+1,0).getDate();
-  for(let i=0;i<startDow;i++) h+='<div class="cal-day empty"></div>';
+  const first=new Date(viewYear,viewMonth,1),startDow=(first.getDay()+6)%7,days=new Date(viewYear,viewMonth+1,0).getDate();
+  for(let i=0;i<startDow;i++)h+='<div class="cal-day empty"></div>';
   for(let d=1;d<=days;d++){
     const k=`${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const isTod=k===todayKey,isSel=k===selectedDate;
-    const hasTasks=(calTasks[k]&&calTasks[k].length)||objectives.filter(o=>isObjActive(o,k)).length;
-    h+=`<div class="cal-day${isTod?' today':''}${isSel?' selected':''}" onclick="selectDay('${k}')">
-      <div class="day-num">${d}</div><div class="day-pip${hasTasks?' on':''}"></div></div>`;
+    const isTod=k===todayKey,isSel=k===selectedDate,hol=isHoliday(k),rest=isRestDay(k);
+    const marker=hol?'<div class="day-marker">🎉</div>':rest?'<div class="day-marker">😴</div>':'';
+    h+=`<div class="cal-day${isTod?' today':''}${isSel?' selected':''}${hol?' holiday':''}${rest?' restday':''}" onclick="selectDay('${k}')"><div class="day-num">${d}</div>${marker}</div>`;
   }
   return h+'</div>';
 }
-
 function renderWeekGrid(){
-  const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  let h='<div class="week-grid">';
+  const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];let h='<div class="week-grid">';
   for(let i=0;i<7;i++){
-    const d=new Date(viewWeekStart);d.setDate(d.getDate()+i);
-    const k=fmt(d);const isTod=k===todayKey,isSel=k===selectedDate;
+    const d=new Date(viewWeekStart);d.setDate(d.getDate()+i);const k=fmt(d);
+    const isTod=k===todayKey,isSel=k===selectedDate,hol=isHoliday(k),rest=isRestDay(k);
     const tasks=calTasks[k]||[];
-    h+=`<div class="week-col">
-      <div class="wk-dow">${T(dow[i])}</div>
-      <div class="wk-day${isTod?' today':''}${isSel?' selected':''}" onclick="selectDay('${k}')">${d.getDate()}</div>
-      <div class="wk-events">${tasks.slice(0,2).map(t=>`<div class="wk-ev">${esc(t.text)}</div>`).join('')}</div>
-    </div>`;
+    h+=`<div class="week-col"><div class="wk-dow">${T(dow[i])}</div><div class="wk-day${isTod?' today':''}${isSel?' selected':''}${hol?' holiday':''}${rest?' restday':''}" onclick="selectDay('${k}')">${d.getDate()}</div><div class="wk-events">${tasks.slice(0,2).map(t=>`<div class="wk-ev">${esc(t.text)}</div>`).join('')}</div></div>`;
   }
   return h+'</div>';
 }
-
 function renderYearGrid(){
   let h='<div class="year-grid">';
   for(let m=0;m<12;m++){
-    const days=new Date(viewYear,m+1,0).getDate();
-    const first=new Date(viewYear,m,1);
-    const startDow=(first.getDay()+6)%7;
-    let cells='';
-    for(let i=0;i<startDow;i++) cells+='<div class="ym-d"></div>';
-    for(let d=1;d<=days;d++){
-      const k=`${viewYear}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const isTod=k===todayKey;
-      const has=(calTasks[k]&&calTasks[k].length);
-      cells+=`<div class="ym-d${isTod?' today':has?' has':''}">${isTod||has?d:''}</div>`;
-    }
-    h+=`<div class="year-month" onclick="viewMonth=${m};calView='month';setCalView('month')">
-      <div class="ym-name">${T('monthsS')[m]}</div>
-      <div class="ym-mini">${cells}</div></div>`;
+    const days=new Date(viewYear,m+1,0).getDate(),first=new Date(viewYear,m,1),startDow=(first.getDay()+6)%7;
+    let cells='';for(let i=0;i<startDow;i++)cells+='<div class="ym-d"></div>';
+    for(let d=1;d<=days;d++){const k=`${viewYear}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const isTod=k===todayKey,has=(calTasks[k]&&calTasks[k].length);cells+=`<div class="ym-d${isTod?' today':has?' has':''}">${isTod||has?d:''}</div>`;}
+    h+=`<div class="year-month" onclick="viewMonth=${m};calView='month';setCalView('month')"><div class="ym-name">${T('monthsS')[m]}</div><div class="ym-mini">${cells}</div></div>`;
   }
   return h+'</div>';
 }
-
-function selectDay(k){
-  selectedDate=k;
-  const d=parseKey(k);viewYear=d.getFullYear();viewMonth=d.getMonth();
-  viewWeekStart=getWeekStart(d);
-  renderCal();
-}
-
+function selectDay(k){selectedDate=k;const d=parseKey(k);viewYear=d.getFullYear();viewMonth=d.getMonth();viewWeekStart=getWeekStart(d);renderCal();}
 function renderDaySectionCal(){
-  const d=parseKey(selectedDate);
-  const dow=(d.getDay()+6)%7;
+  const d=parseKey(selectedDate),dow=(d.getDay()+6)%7;
   const label=`${T('daysLong')[dow]}, ${d.getDate()} ${T('monthsS')[d.getMonth()]}`;
   const pts=calcDayScore(selectedDate);
-  const el=document.getElementById('daySectionCal');
-  const activeObjs=objectives.filter(o=>isObjActive(o,selectedDate));
-  const defHTML=activeObjs.length?`<div class="section-lbl">${T('dailyTasks')}</div><div class="task-list">${activeObjs.map(o=>taskItemHTML('def',o,selectedDate)).join('')}</div>`:'';
+  const hol=isHoliday(selectedDate),rest=isRestDay(selectedDate);
+  const specialBadge=hol?`<span style="font-size:13px;padding:4px 10px;background:var(--holiday2);color:var(--holiday);border-radius:20px;"> 🎉 ${T('holiday')}</span>`:rest?`<span style="font-size:13px;padding:4px 10px;background:var(--restday2);color:var(--restday);border-radius:20px;"> 😴 ${T('restday')}</span>`:'';
+  const activeObjs=(!rest&&!hol)?objectives.filter(o=>isObjActive(o,selectedDate)):[];
   const calT=calTasks[selectedDate]||[];
+  const defHTML=activeObjs.length?`<div class="section-lbl">${T('dailyTasks')}</div><div class="task-list">${activeObjs.map(o=>taskItemHTML('def',o,selectedDate)).join('')}</div>`:'';
   const calHTML=calT.length?`<div class="section-lbl">${T('thisDay')}</div><div class="task-list">${calT.map(t=>taskItemHTML('cal',t,selectedDate)).join('')}</div>`:'';
-  el.innerHTML=`<div class="day-header"><span class="day-full">${label}</span><span class="day-pts">${pts} pts</span></div>${defHTML}${calHTML}${!activeObjs.length&&!calT.length?`<div class="empty-state">${T('noTasks')}</div>`:''}`;
+  document.getElementById('daySectionCal').innerHTML=`
+    <div class="day-header"><div><span class="day-full">${label}</span>${specialBadge}</div><span class="day-pts">${pts} pts</span></div>
+    <div class="day-flags">
+      <button class="day-flag-btn${hol?' holiday-on':''}" onclick="toggleSpecialDay('${selectedDate}','holiday')">${T('markHoliday')}</button>
+      <button class="day-flag-btn${rest?' restday-on':''}" onclick="toggleSpecialDay('${selectedDate}','restday')">${T('markRest')}</button>
+    </div>
+    ${defHTML}${calHTML}
+    ${!activeObjs.length&&!calT.length?`<div class="empty-state">${hol||rest?'😌':T('noTasks')}</div>`:''}`;
   document.getElementById('taskInput').placeholder=T('addTask');
 }
-
 function taskItemHTML(type,t,date){
   const done=isDone(type,t.id,date);
   const badge=type==='def'?`<span class="task-badge daily">${T('daily')}</span>`:'';
   const del=type==='cal'?`<button class="task-del" onclick="event.stopPropagation();delCalTask('${t.id}','${date}')">×</button>`:'';
-  return `<div class="task-item${done?' done':''}" onclick="toggleTask('${type}','${t.id}','${date}')">
-    <div class="check"><span class="ck-mark">✓</span></div>
-    <span class="task-text">${esc(t.text)}</span>${badge}${del}</div>`;
+  return`<div class="task-item${done?' done':''}" onclick="toggleTask('${type}','${t.id}','${date}')"><div class="check"><span class="ck-mark">✓</span></div><span class="task-text">${esc(t.text)}</span>${badge}${del}</div>`;
 }
+function addCalTask(){const inp=document.getElementById('taskInput');const text=inp.value.trim();if(!text)return;if(!calTasks[selectedDate])calTasks[selectedDate]=[];calTasks[selectedDate].push({id:'t'+Date.now(),text});inp.value='';persist();renderAll();}
+function delCalTask(id,date){if(!calTasks[date])return;calTasks[date]=calTasks[date].filter(t=>t.id!==id);persist();renderAll();}
 
-function addCalTask(){
-  const inp=document.getElementById('taskInput');
-  const text=inp.value.trim();if(!text)return;
-  if(!calTasks[selectedDate])calTasks[selectedDate]=[];
-  calTasks[selectedDate].push({id:'t'+Date.now(),text});
-  inp.value='';persist();renderAll();
-}
-
-function delCalTask(id,date){
-  if(!calTasks[date])return;
-  calTasks[date]=calTasks[date].filter(t=>t.id!==id);
-  persist();renderAll();
-}
-
-// ══════════════════════════════════════════
-// OBJECTIVES
-// ══════════════════════════════════════════
-function isObjActive(o,date){
-  const d=parseKey(date);const dow=(d.getDay()+6)%7;return o.days.includes(dow);
-}
-
+// ── OBJECTIVES ──
+function isObjActive(o,date){const d=parseKey(date);const dow=(d.getDay()+6)%7;return o.days.includes(dow);}
 function calcDayScore(date){
-  const active=objectives.filter(o=>isObjActive(o,date));
-  const calT=calTasks[date]||[];
-  const total=active.length+calT.length;
-  if(!total)return 0;
-  const ptsEach=100/total;
+  if(isHoliday(date)||isRestDay(date))return 0;
+  const active=objectives.filter(o=>isObjActive(o,date));const calT=calTasks[date]||[];const total=active.length+calT.length;
+  if(!total)return 0;const ptsEach=100/total;
   const doneCount=active.filter(o=>isDone('def',o.id,date)).length+calT.filter(t=>isDone('cal',t.id,date)).length;
   return Math.round(doneCount*ptsEach);
 }
-
-function isDone(type,id,date){return !!completions[`${type}_${id}_${date}`];}
-
+function isDone(type,id,date){return!!completions[`${type}_${id}_${date}`];}
 function toggleTask(type,id,date){
-  const k=`${type}_${id}_${date}`;
-  const wasDone=!!completions[k];
-  completions[k]=!wasDone;
-  // update total score
-  const pts=calcDayScore(date);
-  const prev=ld('dayScores',{});
-  const prevPts=prev[date]||0;
-  prev[date]=pts;
-  sv('dayScores',prev);
-  // recalc total from all days
-  totalScore=Object.values(prev).reduce((a,b)=>a+b,0);
-  persist();renderAll();
+  const k=`${type}_${id}_${date}`;completions[k]=!completions[k];
+  const pts=calcDayScore(date);const prev=ld('dayScores',{});prev[date]=pts;sv('dayScores',prev);
+  totalScore=Object.values(prev).reduce((a,b)=>a+b,0);persist();renderAll();
 }
 
 function renderObjStrip(){
-  const strip=document.getElementById('objStrip');
-  const chips=[];
+  const strip=document.getElementById('objStrip');const chips=[];
   for(let i=-3;i<=7;i++){
     const d=new Date(now);d.setDate(now.getDate()+i);const k=fmt(d);
-    const label=i===0?(T('today')):i===1?'+1':i===-1?'-1':`${d.getDate()} ${T('monthsS')[d.getMonth()]}`;
+    // Full date label always — "Hoy" only for today
+    const label=i===0?T('today'):`${d.getDate()} ${T('monthsS')[d.getMonth()]}`;
     chips.push(`<div class="date-chip${k===selectedDate?' active':''}" onclick="selectedDate='${k}';renderAll()">${label}</div>`);
   }
   strip.innerHTML=chips.join('');
@@ -1025,220 +579,99 @@ function renderObjList(){
   document.getElementById('objScoreNum').textContent=pts;
   document.getElementById('objScoreFill').style.width=pts+'%';
   document.getElementById('objScoreLbl').textContent='/ 100 pts';
-
-  const activeObjs=objectives.filter(o=>isObjActive(o,selectedDate));
+  const hol=isHoliday(selectedDate),rest=isRestDay(selectedDate);
+  const activeObjs=(!rest&&!hol)?objectives.filter(o=>isObjActive(o,selectedDate)):[];
   const calT=calTasks[selectedDate]||[];
   let html='';
-  if(activeObjs.length){
-    html+=`<div class="section-lbl">${T('dailyTasks')}</div>`;
-    html+=`<div id="objDragList">`;
-    html+=activeObjs.map((o,i)=>{
-      const done=isDone('def',o.id,selectedDate);
-      const daysStr=o.days.length===7?T('daily'):`${o.days.length}d`;
-      return `<div class="obj-item${done?' done':''}" id="objitem-${o.id}" draggable="true" ondragstart="dragStart(event,'${o.id}')" ondragover="dragOver(event,'${o.id}')" ondrop="dragDrop(event,'${o.id}')">
-        <span class="drag-handle">⠿</span>
-        <div class="obj-check" onclick="toggleTask('def','${o.id}','${selectedDate}')"><span class="obj-ck-mark">✓</span></div>
-        <div class="obj-text-wrap">
-          <div class="obj-text">${esc(o.text)}</div>
-          <div class="obj-days">${daysStr}</div>
-        </div>
-        <div class="obj-actions">
-          <button class="obj-edit-btn" onclick="openEditObj('${o.id}')">✎</button>
-          <button class="obj-del-btn" onclick="delObj('${o.id}')">×</button>
-        </div>
-      </div>`;
-    }).join('');
-    html+='</div>';
+  if(hol||rest){
+    html=`<div class="empty-state" style="font-size:32px;padding:20px 0;">${hol?'🎉':'😴'}<br><span style="font-size:16px;margin-top:8px;display:block;">${hol?T('holiday'):T('restday')}</span></div>`;
+  } else {
+    if(activeObjs.length){
+      html+=`<div class="section-lbl">${T('dailyTasks')}</div>`;
+      activeObjs.forEach((o,i)=>{
+        const done=isDone('def',o.id,selectedDate);
+        const daysStr=o.days.length===7?T('daily'):`${o.days.length}d`;
+        const isFirst=i===0,isLast=i===activeObjs.length-1;
+        html+=`<div class="obj-item${done?' done':''}" id="objitem-${o.id}">
+          <div class="obj-arrows">
+            <button class="arr-btn" onclick="moveObj('${o.id}',-1)" ${isFirst?'disabled':''}>▲</button>
+            <button class="arr-btn" onclick="moveObj('${o.id}',1)" ${isLast?'disabled':''}>▼</button>
+          </div>
+          <div class="obj-check" onclick="toggleTask('def','${o.id}','${selectedDate}')"><span class="obj-ck-mark">✓</span></div>
+          <div class="obj-text-wrap"><div class="obj-text">${esc(o.text)}</div><div class="obj-days">${daysStr}</div></div>
+          <div class="obj-actions">
+            <button class="obj-edit-btn" onclick="openEditObj('${o.id}')">✎</button>
+            <button class="obj-del-btn" onclick="delObj('${o.id}')">×</button>
+          </div>
+        </div>`;
+      });
+    }
+    if(calT.length){
+      html+=`<div class="section-lbl">${T('thisDay')}</div>`;
+      calT.forEach(t=>{
+        const done=isDone('cal',t.id,selectedDate);
+        html+=`<div class="obj-item${done?' done':''}">
+          <div class="obj-arrows"><button class="arr-btn" disabled style="visibility:hidden">▲</button><button class="arr-btn" disabled style="visibility:hidden">▼</button></div>
+          <div class="obj-check" onclick="toggleTask('cal','${t.id}','${selectedDate}')"><span class="obj-ck-mark">✓</span></div>
+          <div class="obj-text-wrap"><div class="obj-text">${esc(t.text)}</div></div>
+          <div class="obj-actions"><button class="obj-del-btn" onclick="delCalTask('${t.id}','${selectedDate}');renderAll()">×</button></div>
+        </div>`;
+      });
+    }
+    if(!activeObjs.length&&!calT.length)html=`<div class="empty-state">${T('noTasks')}</div>`;
   }
-  if(calT.length){
-    html+=`<div class="section-lbl">${T('thisDay')}</div>`;
-    html+=calT.map(t=>{
-      const done=isDone('cal',t.id,selectedDate);
-      return `<div class="obj-item${done?' done':''}">
-        <span class="drag-handle" style="opacity:0.3">⠿</span>
-        <div class="obj-check" onclick="toggleTask('cal','${t.id}','${selectedDate}')"><span class="obj-ck-mark">✓</span></div>
-        <div class="obj-text-wrap"><div class="obj-text">${esc(t.text)}</div></div>
-        <div class="obj-actions"><button class="obj-del-btn" onclick="delCalTask('${t.id}','${selectedDate}');renderAll()">×</button></div>
-      </div>`;
-    }).join('');
-  }
-  if(!activeObjs.length&&!calT.length) html=`<div class="empty-state">${T('noTasks')}</div>`;
   document.getElementById('objList').innerHTML=html;
   document.getElementById('addObjBtn').textContent=T('addObj');
 }
 
-// Drag to reorder
-let dragSrcId=null;
-function dragStart(e,id){dragSrcId=id;e.currentTarget.classList.add('dragging');}
-function dragOver(e,id){e.preventDefault();}
-function dragDrop(e,id){
-  e.preventDefault();
-  if(!dragSrcId||dragSrcId===id)return;
-  const fromIdx=objectives.findIndex(o=>o.id===dragSrcId);
-  const toIdx=objectives.findIndex(o=>o.id===id);
-  if(fromIdx<0||toIdx<0)return;
-  const [moved]=objectives.splice(fromIdx,1);
-  objectives.splice(toIdx,0,moved);
-  dragSrcId=null;persist();renderAll();
+function moveObj(id,dir){
+  const idx=objectives.findIndex(o=>o.id===id);if(idx<0)return;
+  const newIdx=idx+dir;if(newIdx<0||newIdx>=objectives.length)return;
+  const[moved]=objectives.splice(idx,1);objectives.splice(newIdx,0,moved);
+  persist();renderAll();
 }
 
-// Edit modal
-function openNewObj(){
-  editingObjId=null;
-  document.getElementById('editModalTitle').textContent=T('newObj');
-  document.getElementById('editModalInput').value='';
-  document.getElementById('editModalInput').placeholder=T('objName');
-  renderEditDays([0,1,2,3,4,5,6]);
-  document.getElementById('editModalDaysLabel').textContent=T('activeDays');
-  document.getElementById('editModal').classList.remove('hidden');
-}
-
-function openEditObj(id){
-  editingObjId=id;
-  const o=objectives.find(x=>x.id===id);if(!o)return;
-  document.getElementById('editModalTitle').textContent=T('editObj');
-  document.getElementById('editModalInput').value=o.text;
-  document.getElementById('editModalInput').placeholder=T('objName');
-  renderEditDays(o.days);
-  document.getElementById('editModalDaysLabel').textContent=T('activeDays');
-  document.getElementById('editModal').classList.remove('hidden');
-}
-
-function renderEditDays(active){
-  const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  document.getElementById('editModalDays').innerHTML=dow.map((d,i)=>`
-    <button class="day-toggle${active.includes(i)?' on':''}" onclick="toggleEditDay(${i})">${T(d)}</button>`).join('');
-}
-
-function toggleEditDay(i){
-  const btns=document.querySelectorAll('.day-toggle');
-  btns[i].classList.toggle('on');
-}
-
+function openNewObj(){editingObjId=null;document.getElementById('editModalTitle').textContent=T('newObj');document.getElementById('editModalInput').value='';document.getElementById('editModalInput').placeholder=T('objName');renderEditDays([0,1,2,3,4,5,6]);document.getElementById('editModalDaysLabel').textContent=T('activeDays');document.getElementById('deselectAllBtn').textContent=T('deselectAll');document.getElementById('modalCancelBtn').textContent=T('cancel');document.getElementById('modalSaveBtn').textContent=T('save');document.getElementById('editModal').classList.remove('hidden');}
+function openEditObj(id){editingObjId=id;const o=objectives.find(x=>x.id===id);if(!o)return;document.getElementById('editModalTitle').textContent=T('editObj');document.getElementById('editModalInput').value=o.text;document.getElementById('editModalInput').placeholder=T('objName');renderEditDays(o.days);document.getElementById('editModalDaysLabel').textContent=T('activeDays');document.getElementById('deselectAllBtn').textContent=T('deselectAll');document.getElementById('modalCancelBtn').textContent=T('cancel');document.getElementById('modalSaveBtn').textContent=T('save');document.getElementById('editModal').classList.remove('hidden');}
+function renderEditDays(active){const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];document.getElementById('editModalDays').innerHTML=dow.map((d,i)=>`<button class="day-toggle${active.includes(i)?' on':''}" onclick="toggleEditDay(${i})">${T(d)}</button>`).join('');}
+function toggleEditDay(i){document.querySelectorAll('.day-toggle')[i].classList.toggle('on');}
+function deselectAllDays(){document.querySelectorAll('.day-toggle').forEach(b=>b.classList.remove('on'));}
 function closeEditModal(){document.getElementById('editModal').classList.add('hidden');editingObjId=null;}
-
-function saveEditModal(){
-  const text=document.getElementById('editModalInput').value.trim();
-  if(!text){closeEditModal();return;}
-  const days=[...document.querySelectorAll('.day-toggle')].map((b,i)=>b.classList.contains('on')?i:-1).filter(x=>x>=0);
-  if(editingObjId){
-    const o=objectives.find(x=>x.id===editingObjId);
-    if(o){o.text=text;o.days=days.length?days:[0,1,2,3,4,5,6];}
-  } else {
-    objectives.push({id:'o'+Date.now(),text,days:days.length?days:[0,1,2,3,4,5,6]});
-  }
-  closeEditModal();persist();renderAll();
-}
-
+function saveEditModal(){const text=document.getElementById('editModalInput').value.trim();if(!text){closeEditModal();return;}const days=[...document.querySelectorAll('.day-toggle')].map((b,i)=>b.classList.contains('on')?i:-1).filter(x=>x>=0);if(editingObjId){const o=objectives.find(x=>x.id===editingObjId);if(o){o.text=text;o.days=days.length?days:[0,1,2,3,4,5,6];}}else{objectives.push({id:'o'+Date.now(),text,days:days.length?days:[0,1,2,3,4,5,6]});}closeEditModal();persist();renderAll();}
 function delObj(id){objectives=objectives.filter(o=>o.id!==id);persist();renderAll();}
 
-// ══════════════════════════════════════════
-// STATS
-// ══════════════════════════════════════════
+// ── STATS ──
 function renderStats(){
-  document.getElementById('totalScoreNum').textContent=totalScore;
-  document.getElementById('totalScoreLbl').textContent=T('totalPoints');
-  document.getElementById('totalScoreSub').textContent=T('accumulated');
-  const dayScores=ld('dayScores',{});
-  // Last 30 days
-  const days=[];
-  for(let i=29;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);days.push(fmt(d));}
-  const last30=days.map(k=>({date:k,pts:dayScores[k]||0}));
-  const sum30=last30.reduce((a,b)=>a+b.pts,0);
-  const avgPts=Math.round(sum30/30);
-  const maxPts=Math.max(...last30.map(x=>x.pts),1);
-  let html=`<div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
-    <div style="display:flex;gap:12px;margin-bottom:16px;">
-      <div style="flex:1;text-align:center;">
-        <div style="font-family:'DM Mono',monospace;font-size:20px;color:var(--accent);">${sum30}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:3px;">Últimos 30d</div>
-      </div>
-      <div style="width:0.5px;background:var(--border);"></div>
-      <div style="flex:1;text-align:center;">
-        <div style="font-family:'DM Mono',monospace;font-size:20px;color:var(--accent);">${avgPts}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:3px;">Promedio/día</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:flex-end;gap:3px;height:60px;">
-      ${last30.slice(-14).map(x=>{
-        const h=Math.max(4,Math.round((x.pts/maxPts)*56));
-        const isToday=x.date===todayKey;
-        return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
-          <div style="width:100%;height:${h}px;background:${isToday?'var(--accent)':'var(--accent2)'};border-radius:3px 3px 0 0;" title="${x.pts} pts"></div>
-        </div>`;
-      }).join('')}
-    </div>
-    <div style="font-size:10px;color:var(--text3);text-align:center;margin-top:6px;font-family:'DM Mono',monospace;">Últimos 14 días</div>
-  </div>`;
-  document.getElementById('statsGrid').innerHTML=html;
+  document.getElementById('totalScoreNum').textContent=totalScore;document.getElementById('totalScoreLbl').textContent=T('totalPoints');document.getElementById('totalScoreSub').textContent=T('accumulated');
+  const dayScores=ld('dayScores',{});const days=[];for(let i=29;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);days.push(fmt(d));}
+  const last30=days.map(k=>({date:k,pts:dayScores[k]||0}));const sum30=last30.reduce((a,b)=>a+b.pts,0);const avgPts=Math.round(sum30/30);const maxPts=Math.max(...last30.map(x=>x.pts),1);
+  document.getElementById('statsGrid').innerHTML=`<div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px;"><div style="display:flex;gap:14px;margin-bottom:18px;"><div style="flex:1;text-align:center;"><div style="font-family:'DM Mono',monospace;font-size:24px;color:var(--accent);">${sum30}</div><div style="font-size:13px;color:var(--text2);margin-top:3px;">Últimos 30d</div></div><div style="width:0.5px;background:var(--border);"></div><div style="flex:1;text-align:center;"><div style="font-family:'DM Mono',monospace;font-size:24px;color:var(--accent);">${avgPts}</div><div style="font-size:13px;color:var(--text2);margin-top:3px;">Promedio/día</div></div></div><div style="display:flex;align-items:flex-end;gap:3px;height:64px;">${last30.slice(-14).map(x=>{const h=Math.max(4,Math.round((x.pts/maxPts)*60));const isToday=x.date===todayKey;return`<div style="flex:1;height:${h}px;background:${isToday?'var(--accent)':'var(--accent2)'};border-radius:3px 3px 0 0;"></div>`;}).join('')}</div><div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;font-family:'DM Mono',monospace;">Últimos 14 días</div></div>`;
 }
 
-// ══════════════════════════════════════════
-// SETTINGS RENDER
-// ══════════════════════════════════════════
+// ── SETTINGS ──
 function renderSettings(){
-  document.getElementById('cfgTitleAppearance').textContent=T('appearance');
-  document.getElementById('cfgDarkMode').textContent=T('darkMode');
-  document.getElementById('darkModeBtn').textContent=isDark?T('on'):T('off');
-  document.getElementById('cfgAccentColor').textContent=T('accentColor');
-  document.getElementById('cfgTitleLanguage').textContent=T('language');
-  document.getElementById('cfgTitleScore').textContent='Puntuación';
-  document.getElementById('cfgResetScore').textContent=T('resetScore');
-  document.getElementById('cfgResetBtn').textContent=T('reset');
-  document.getElementById('cfgTitleSupport').textContent=T('support');
-  document.getElementById('donateBtnText').textContent=T('donate');
-  document.getElementById('donateSubText').textContent=T('donateSub');
-  // Lang grid in settings
-  const g=document.getElementById('settingsLangGrid');
-  g.innerHTML=Object.keys(LANGS).map(k=>`<button class="lang-opt${lang===k?' active':''}" onclick="changeLang('${k}')">${LANGS[k].name}</button>`).join('');
+  document.getElementById('cfgTitleAppearance').textContent=T('appearance');document.getElementById('cfgDarkMode').textContent=T('darkMode');document.getElementById('darkModeBtn').textContent=isDark?T('on'):T('off');document.getElementById('cfgAccentColor').textContent=T('accentColor');document.getElementById('cfgTitleLanguage').textContent=T('language');document.getElementById('cfgResetScore').textContent=T('resetScore');document.getElementById('cfgResetBtn').textContent=T('reset');document.getElementById('cfgTitleSupport').textContent=T('support');document.getElementById('donateBtnText').textContent=T('donate');document.getElementById('donateSubText').textContent=T('donateSub');
+  document.getElementById('settingsLangGrid').innerHTML=Object.keys(LANGS).map(k=>`<button class="lang-opt${lang===k?' active':''}" onclick="changeLang('${k}')">${LANGS[k].name}</button>`).join('');
 }
-
 function changeLang(l){lang=l;sv('lang',l);initObjTexts();renderAll();}
-function toggleDark(){isDark=!isDark;sv('isDark',isDark);applyTheme();renderSettings();}
 function confirmReset(){if(confirm('¿Reiniciar todos los puntos?')){totalScore=0;sv('totalScore',0);sv('dayScores',{});completions={};sv('completions',{});renderAll();}}
 function openDonate(){window.open('https://www.paypal.com/paypalme','_blank');}
 
-// ══════════════════════════════════════════
-// RENDER ALL
-// ══════════════════════════════════════════
+// ── RENDER ALL ──
 function renderAll(){
   applyTheme();
-  // header
-  const pts=calcDayScore(todayKey);
-  document.getElementById('headerScore').textContent=`${pts} pts`;
-  document.getElementById('todayChipBtn').textContent=T('today');
-  // tabs labels
-  document.getElementById('tab-cal').textContent=T('calendar');
-  document.getElementById('tab-obj').textContent=T('objectives');
-  document.getElementById('tab-stats').textContent=T('points');
-  document.getElementById('tab-cfg').textContent=T('settings');
-
-  if(activeTab==='cal') renderCal();
-  else if(activeTab==='obj') renderObjList();
-  else if(activeTab==='stats') renderStats();
-  else if(activeTab==='cfg') renderSettings();
+  const pts=calcDayScore(todayKey);document.getElementById('headerScore').textContent=`${pts} pts`;document.getElementById('todayChipBtn').textContent=T('today');
+  document.getElementById('tab-cal').textContent=T('calendar');document.getElementById('tab-obj').textContent=T('objectives');document.getElementById('tab-stats').textContent=T('points');document.getElementById('tab-cfg').textContent=T('settings');
+  if(activeTab==='cal')renderCal();else if(activeTab==='obj')renderObjList();else if(activeTab==='stats')renderStats();else if(activeTab==='cfg')renderSettings();
 }
 
-// ══════════════════════════════════════════
-// SERVICE WORKER
-// ══════════════════════════════════════════
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
-}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 
-// ══════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════
 (function init(){
   applyTheme();
-  const firstTime=!ld('tutDone',false);
-  const hasLang=ld('lang',null);
-  if(!hasLang||firstTime){
-    renderLangScreen();
-  } else {
-    document.getElementById('langScreen').classList.add('hidden');
-    launchApp();
-  }
+  const firstTime=!ld('tutDone',false),hasLang=ld('lang',null);
+  if(!hasLang||firstTime){renderLangScreen();document.getElementById('langScreen').classList.remove('hidden');}
+  else{document.getElementById('langScreen').classList.add('hidden');launchApp();}
 })();
 </script>
 </body>
