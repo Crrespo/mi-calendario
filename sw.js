@@ -1,4 +1,4 @@
-const CACHE = 'dayflow-v2';
+const CACHE = 'dayflow-v3';
 const ASSETS = [
   '/mi-calendario/',
   '/mi-calendario/index.html',
