@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
@@ -242,6 +243,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <div class="modal-label" id="editModalDaysLabel">Días activos</div>
     <div class="days-row" id="editModalDays"></div>
     <button class="deselect-all-btn" id="deselectAllBtn" onclick="deselectAllDays()">Deseleccionar todos</button>
+    <div class="modal-label" id="editModalSpecialLabel" style="margin-top:4px;">Mostrar también en</div>
+    <div style="display:flex;gap:10px;margin-bottom:18px;">
+      <button class="day-toggle on" id="toggleHoliday" onclick="this.classList.toggle('on')" style="width:auto;padding:0 16px;border-radius:20px;font-size:13px;font-family:'DM Sans',sans-serif;">🎉 Festivos</button>
+      <button class="day-toggle on" id="toggleRestday" onclick="this.classList.toggle('on')" style="width:auto;padding:0 16px;border-radius:20px;font-size:13px;font-family:'DM Sans',sans-serif;">😴 Descanso</button>
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeEditModal()" id="modalCancelBtn">Cancelar</button>
       <button class="modal-save" onclick="saveEditModal()" id="modalSaveBtn">Guardar</button>
@@ -349,7 +355,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 </div>
 
 <script>
-const LANGS={es:{name:'Español',native:'Español',t:{week:'Semana',month:'Mes',year:'Año',today:'Hoy',daily:'diaria',thisDay:'Este día',objectives:'Objetivos',points:'Puntos',settings:'Ajustes',calendar:'Calendario',dailyTasks:'Tareas diarias',dayTasks:'Del día',addTask:'Nueva tarea...',addObj:'+ Nuevo objetivo diario',totalPoints:'Puntos totales',accumulated:'Acumulados desde siempre',appearance:'Apariencia',darkMode:'Modo oscuro',accentColor:'Color de acento',language:'Idioma',support:'Soporte',donate:'Apoyar con donación',donateSub:'Redirige a PayPal · Opcional y voluntario',on:'Activado',off:'Desactivado',resetScore:'Reiniciar puntos',reset:'Reiniciar',editObj:'Editar objetivo',newObj:'Nuevo objetivo',objName:'Nombre de la tarea...',activeDays:'Días activos',cancel:'Cancelar',save:'Guardar',Mon:'L',Tue:'M',Wed:'X',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthsS:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],daysLong:['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],noTasks:'Sin tareas — añade una abajo',skip:'Saltar',next:'Siguiente →',finish:'Empezar',back:'←',deselectAll:'Deseleccionar todos',holiday:'Fiesta',restday:'Descanso',markHoliday:'🎉 Día festivo',markRest:'😴 Día de descanso'}},en:{name:'English',native:'English',t:{week:'Week',month:'Month',year:'Year',today:'Today',daily:'daily',thisDay:'This day',objectives:'Goals',points:'Points',settings:'Settings',calendar:'Calendar',dailyTasks:'Daily tasks',dayTasks:"Today's",addTask:'New task...',addObj:'+ New daily goal',totalPoints:'Total points',accumulated:'Accumulated forever',appearance:'Appearance',darkMode:'Dark mode',accentColor:'Accent color',language:'Language',support:'Support',donate:'Support with donation',donateSub:'Redirects to PayPal · Optional',on:'On',off:'Off',resetScore:'Reset points',reset:'Reset',editObj:'Edit goal',newObj:'New goal',objName:'Task name...',activeDays:'Active days',cancel:'Cancel',save:'Save',Mon:'M',Tue:'T',Wed:'W',Thu:'T',Fri:'F',Sat:'S',Sun:'S',months:['January','February','March','April','May','June','July','August','September','October','November','December'],monthsS:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],daysLong:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],noTasks:'No tasks — add one below',skip:'Skip',next:'Next →',finish:'Start',back:'←',deselectAll:'Deselect all',holiday:'Holiday',restday:'Rest day',markHoliday:'🎉 Holiday',markRest:'😴 Rest day'}},fr:{name:'Français',native:'Français',t:{week:'Semaine',month:'Mois',year:'Année',today:"Aujourd'hui",daily:'quotidien',thisDay:'Ce jour',objectives:'Objectifs',points:'Points',settings:'Réglages',calendar:'Calendrier',dailyTasks:'Tâches quotidiennes',dayTasks:'Du jour',addTask:'Nouvelle tâche...',addObj:'+ Nouvel objectif',totalPoints:'Points totaux',accumulated:'Accumulés',appearance:'Apparence',darkMode:'Mode sombre',accentColor:"Couleur d'accent",language:'Langue',support:'Soutien',donate:'Soutenir par don',donateSub:'Redirige vers PayPal',on:'Activé',off:'Désactivé',resetScore:'Réinitialiser',reset:'Réinitialiser',editObj:'Modifier',newObj:'Nouvel objectif',objName:'Nom...',activeDays:'Jours actifs',cancel:'Annuler',save:'Enregistrer',Mon:'L',Tue:'M',Wed:'M',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],monthsS:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],daysLong:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],noTasks:'Aucune tâche',skip:'Passer',next:'Suivant →',finish:'Commencer',back:'←',deselectAll:'Tout désélectionner',holiday:'Fête',restday:'Repos',markHoliday:'🎉 Jour férié',markRest:'😴 Repos'}},de:{name:'Deutsch',native:'Deutsch',t:{week:'Woche',month:'Monat',year:'Jahr',today:'Heute',daily:'täglich',thisDay:'Heute',objectives:'Ziele',points:'Punkte',settings:'Einstellungen',calendar:'Kalender',dailyTasks:'Aufgaben',dayTasks:'Heute',addTask:'Neue Aufgabe...',addObj:'+ Neues Ziel',totalPoints:'Gesamtpunkte',accumulated:'Insgesamt',appearance:'Aussehen',darkMode:'Dunkelmodus',accentColor:'Akzentfarbe',language:'Sprache',support:'Unterstützung',donate:'Mit Spende unterstützen',donateSub:'Weiterleitung zu PayPal',on:'An',off:'Aus',resetScore:'Zurücksetzen',reset:'Zurücksetzen',editObj:'Bearbeiten',newObj:'Neues Ziel',objName:'Name...',activeDays:'Aktive Tage',cancel:'Abbrechen',save:'Speichern',Mon:'Mo',Tue:'Di',Wed:'Mi',Thu:'Do',Fri:'Fr',Sat:'Sa',Sun:'So',months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],monthsS:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],daysLong:['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],noTasks:'Keine Aufgaben',skip:'Überspringen',next:'Weiter →',finish:'Starten',back:'←',deselectAll:'Alle abwählen',holiday:'Feiertag',restday:'Ruhetag',markHoliday:'🎉 Feiertag',markRest:'😴 Ruhetag'}},pt:{name:'Português',native:'Português',t:{week:'Semana',month:'Mês',year:'Ano',today:'Hoje',daily:'diária',thisDay:'Neste dia',objectives:'Objetivos',points:'Pontos',settings:'Ajustes',calendar:'Calendário',dailyTasks:'Tarefas diárias',dayTasks:'Do dia',addTask:'Nova tarefa...',addObj:'+ Novo objetivo',totalPoints:'Pontos totais',accumulated:'Acumulados',appearance:'Aparência',darkMode:'Modo escuro',accentColor:'Cor destaque',language:'Idioma',support:'Suporte',donate:'Apoiar com doação',donateSub:'Redireciona para PayPal',on:'Ativado',off:'Desativado',resetScore:'Reiniciar',reset:'Reiniciar',editObj:'Editar',newObj:'Novo objetivo',objName:'Nome...',activeDays:'Dias ativos',cancel:'Cancelar',save:'Salvar',Mon:'S',Tue:'T',Wed:'Q',Thu:'Q',Fri:'S',Sat:'S',Sun:'D',months:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],monthsS:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],daysLong:['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],noTasks:'Sem tarefas',skip:'Pular',next:'Próximo →',finish:'Começar',back:'←',deselectAll:'Desmarcar todos',holiday:'Feriado',restday:'Descanso',markHoliday:'🎉 Feriado',markRest:'😴 Descanso'}},it:{name:'Italiano',native:'Italiano',t:{week:'Settimana',month:'Mese',year:'Anno',today:'Oggi',daily:'quotidiana',thisDay:'Questo giorno',objectives:'Obiettivi',points:'Punti',settings:'Impostazioni',calendar:'Calendario',dailyTasks:'Attività quotidiane',dayTasks:'Del giorno',addTask:'Nuova attività...',addObj:'+ Nuovo obiettivo',totalPoints:'Punti totali',accumulated:'Accumulati',appearance:'Aspetto',darkMode:'Modalità scura',accentColor:'Colore accento',language:'Lingua',support:'Supporto',donate:'Supporta con donazione',donateSub:'Reindirizza a PayPal',on:'Attivo',off:'Disattivo',resetScore:'Azzera punti',reset:'Azzera',editObj:'Modifica',newObj:'Nuovo obiettivo',objName:'Nome...',activeDays:'Giorni attivi',cancel:'Annulla',save:'Salva',Mon:'L',Tue:'M',Wed:'M',Thu:'G',Fri:'V',Sat:'S',Sun:'D',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],monthsS:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],daysLong:['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'],noTasks:'Nessuna attività',skip:'Salta',next:'Avanti →',finish:'Inizia',back:'←',deselectAll:'Deseleziona tutti',holiday:'Festivo',restday:'Riposo',markHoliday:'🎉 Giorno festivo',markRest:'😴 Giorno di riposo'}},zh:{name:'中文',native:'中文',t:{week:'周',month:'月',year:'年',today:'今天',daily:'每日',thisDay:'当天',objectives:'目标',points:'积分',settings:'设置',calendar:'日历',dailyTasks:'每日任务',dayTasks:'当天',addTask:'新任务...',addObj:'+ 新建每日目标',totalPoints:'总积分',accumulated:'累计总分',appearance:'外观',darkMode:'深色模式',accentColor:'强调色',language:'语言',support:'支持',donate:'捐款支持',donateSub:'跳转到 PayPal',on:'开启',off:'关闭',resetScore:'重置积分',reset:'重置',editObj:'编辑',newObj:'新建目标',objName:'任务名称...',activeDays:'活跃日',cancel:'取消',save:'保存',Mon:'一',Tue:'二',Wed:'三',Thu:'四',Fri:'五',Sat:'六',Sun:'日',months:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],monthsS:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],daysLong:['周一','周二','周三','周四','周五','周六','周日'],noTasks:'无任务',skip:'跳过',next:'下一步 →',finish:'开始',back:'←',deselectAll:'取消全选',holiday:'节假日',restday:'休息日',markHoliday:'🎉 节假日',markRest:'😴 休息日'}}};
+const LANGS={es:{name:'Español',native:'Español',t:{week:'Semana',month:'Mes',year:'Año',today:'Hoy',daily:'diaria',thisDay:'Este día',objectives:'Objetivos',points:'Puntos',settings:'Ajustes',calendar:'Calendario',dailyTasks:'Tareas diarias',dayTasks:'Del día',addTask:'Nueva tarea...',addObj:'+ Nuevo objetivo diario',totalPoints:'Puntos totales',accumulated:'Acumulados desde siempre',appearance:'Apariencia',darkMode:'Modo oscuro',accentColor:'Color de acento',language:'Idioma',support:'Soporte',donate:'Apoyar con donación',donateSub:'Redirige a PayPal · Opcional y voluntario',on:'Activado',off:'Desactivado',resetScore:'Reiniciar puntos',reset:'Reiniciar',editObj:'Editar objetivo',newObj:'Nuevo objetivo',objName:'Nombre de la tarea...',activeDays:'Días activos',cancel:'Cancelar',save:'Guardar',Mon:'L',Tue:'M',Wed:'X',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthsS:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],daysLong:['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],noTasks:'Sin tareas — añade una abajo',skip:'Saltar',next:'Siguiente →',finish:'Empezar',back:'←',deselectAll:'Deseleccionar todos',holiday:'Fiesta',restday:'Descanso',markHoliday:'🎉 Día festivo',markRest:'😴 Día de descanso',showAlsoOn:'Mostrar también en'}},en:{name:'English',native:'English',t:{week:'Week',month:'Month',year:'Year',today:'Today',daily:'daily',thisDay:'This day',objectives:'Goals',points:'Points',settings:'Settings',calendar:'Calendar',dailyTasks:'Daily tasks',dayTasks:"Today's",addTask:'New task...',addObj:'+ New daily goal',totalPoints:'Total points',accumulated:'Accumulated forever',appearance:'Appearance',darkMode:'Dark mode',accentColor:'Accent color',language:'Language',support:'Support',donate:'Support with donation',donateSub:'Redirects to PayPal · Optional',on:'On',off:'Off',resetScore:'Reset points',reset:'Reset',editObj:'Edit goal',newObj:'New goal',objName:'Task name...',activeDays:'Active days',cancel:'Cancel',save:'Save',Mon:'M',Tue:'T',Wed:'W',Thu:'T',Fri:'F',Sat:'S',Sun:'S',months:['January','February','March','April','May','June','July','August','September','October','November','December'],monthsS:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],daysLong:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],noTasks:'No tasks — add one below',skip:'Skip',next:'Next →',finish:'Start',back:'←',deselectAll:'Deselect all',holiday:'Holiday',restday:'Rest day',markHoliday:'🎉 Holiday',markRest:'😴 Rest day',showAlsoOn:'Also show on'}},fr:{name:'Français',native:'Français',t:{week:'Semaine',month:'Mois',year:'Année',today:"Aujourd'hui",daily:'quotidien',thisDay:'Ce jour',objectives:'Objectifs',points:'Points',settings:'Réglages',calendar:'Calendrier',dailyTasks:'Tâches quotidiennes',dayTasks:'Du jour',addTask:'Nouvelle tâche...',addObj:'+ Nouvel objectif',totalPoints:'Points totaux',accumulated:'Accumulés',appearance:'Apparence',darkMode:'Mode sombre',accentColor:"Couleur d'accent",language:'Langue',support:'Soutien',donate:'Soutenir par don',donateSub:'Redirige vers PayPal',on:'Activé',off:'Désactivé',resetScore:'Réinitialiser',reset:'Réinitialiser',editObj:'Modifier',newObj:'Nouvel objectif',objName:'Nom...',activeDays:'Jours actifs',cancel:'Annuler',save:'Enregistrer',Mon:'L',Tue:'M',Wed:'M',Thu:'J',Fri:'V',Sat:'S',Sun:'D',months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],monthsS:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],daysLong:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],noTasks:'Aucune tâche',skip:'Passer',next:'Suivant →',finish:'Commencer',back:'←',deselectAll:'Tout désélectionner',holiday:'Fête',restday:'Repos',markHoliday:'🎉 Jour férié',markRest:'😴 Repos',showAlsoOn:'Afficher aussi le'}},de:{name:'Deutsch',native:'Deutsch',t:{week:'Woche',month:'Monat',year:'Jahr',today:'Heute',daily:'täglich',thisDay:'Heute',objectives:'Ziele',points:'Punkte',settings:'Einstellungen',calendar:'Kalender',dailyTasks:'Aufgaben',dayTasks:'Heute',addTask:'Neue Aufgabe...',addObj:'+ Neues Ziel',totalPoints:'Gesamtpunkte',accumulated:'Insgesamt',appearance:'Aussehen',darkMode:'Dunkelmodus',accentColor:'Akzentfarbe',language:'Sprache',support:'Unterstützung',donate:'Mit Spende unterstützen',donateSub:'Weiterleitung zu PayPal',on:'An',off:'Aus',resetScore:'Zurücksetzen',reset:'Zurücksetzen',editObj:'Bearbeiten',newObj:'Neues Ziel',objName:'Name...',activeDays:'Aktive Tage',cancel:'Abbrechen',save:'Speichern',Mon:'Mo',Tue:'Di',Wed:'Mi',Thu:'Do',Fri:'Fr',Sat:'Sa',Sun:'So',months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],monthsS:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],daysLong:['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],noTasks:'Keine Aufgaben',skip:'Überspringen',next:'Weiter →',finish:'Starten',back:'←',deselectAll:'Alle abwählen',holiday:'Feiertag',restday:'Ruhetag',markHoliday:'🎉 Feiertag',markRest:'😴 Ruhetag',showAlsoOn:'Auch anzeigen am'}},pt:{name:'Português',native:'Português',t:{week:'Semana',month:'Mês',year:'Ano',today:'Hoje',daily:'diária',thisDay:'Neste dia',objectives:'Objetivos',points:'Pontos',settings:'Ajustes',calendar:'Calendário',dailyTasks:'Tarefas diárias',dayTasks:'Do dia',addTask:'Nova tarefa...',addObj:'+ Novo objetivo',totalPoints:'Pontos totais',accumulated:'Acumulados',appearance:'Aparência',darkMode:'Modo escuro',accentColor:'Cor destaque',language:'Idioma',support:'Suporte',donate:'Apoiar com doação',donateSub:'Redireciona para PayPal',on:'Ativado',off:'Desativado',resetScore:'Reiniciar',reset:'Reiniciar',editObj:'Editar',newObj:'Novo objetivo',objName:'Nome...',activeDays:'Dias ativos',cancel:'Cancelar',save:'Salvar',Mon:'S',Tue:'T',Wed:'Q',Thu:'Q',Fri:'S',Sat:'S',Sun:'D',months:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],monthsS:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],daysLong:['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],noTasks:'Sem tarefas',skip:'Pular',next:'Próximo →',finish:'Começar',back:'←',deselectAll:'Desmarcar todos',holiday:'Feriado',restday:'Descanso',markHoliday:'🎉 Feriado',markRest:'😴 Descanso',showAlsoOn:'Mostrar também em'}},it:{name:'Italiano',native:'Italiano',t:{week:'Settimana',month:'Mese',year:'Anno',today:'Oggi',daily:'quotidiana',thisDay:'Questo giorno',objectives:'Obiettivi',points:'Punti',settings:'Impostazioni',calendar:'Calendario',dailyTasks:'Attività quotidiane',dayTasks:'Del giorno',addTask:'Nuova attività...',addObj:'+ Nuovo obiettivo',totalPoints:'Punti totali',accumulated:'Accumulati',appearance:'Aspetto',darkMode:'Modalità scura',accentColor:'Colore accento',language:'Lingua',support:'Supporto',donate:'Supporta con donazione',donateSub:'Reindirizza a PayPal',on:'Attivo',off:'Disattivo',resetScore:'Azzera punti',reset:'Azzera',editObj:'Modifica',newObj:'Nuovo obiettivo',objName:'Nome...',activeDays:'Giorni attivi',cancel:'Annulla',save:'Salva',Mon:'L',Tue:'M',Wed:'M',Thu:'G',Fri:'V',Sat:'S',Sun:'D',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],monthsS:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],daysLong:['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'],noTasks:'Nessuna attività',skip:'Salta',next:'Avanti →',finish:'Inizia',back:'←',deselectAll:'Deseleziona tutti',holiday:'Festivo',restday:'Riposo',markHoliday:'🎉 Giorno festivo',markRest:'😴 Giorno di riposo',showAlsoOn:'Mostra anche in'}},zh:{name:'中文',native:'中文',t:{week:'周',month:'月',year:'年',today:'今天',daily:'每日',thisDay:'当天',objectives:'目标',points:'积分',settings:'设置',calendar:'日历',dailyTasks:'每日任务',dayTasks:'当天',addTask:'新任务...',addObj:'+ 新建每日目标',totalPoints:'总积分',accumulated:'累计总分',appearance:'外观',darkMode:'深色模式',accentColor:'强调色',language:'语言',support:'支持',donate:'捐款支持',donateSub:'跳转到 PayPal',on:'开启',off:'关闭',resetScore:'重置积分',reset:'重置',editObj:'编辑',newObj:'新建目标',objName:'任务名称...',activeDays:'活跃日',cancel:'取消',save:'保存',Mon:'一',Tue:'二',Wed:'三',Thu:'四',Fri:'五',Sat:'六',Sun:'日',months:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],monthsS:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],daysLong:['周一','周二','周三','周四','周五','周六','周日'],noTasks:'无任务',skip:'跳过',next:'下一步 →',finish:'开始',back:'←',deselectAll:'取消全选',holiday:'节假日',restday:'休息日',markHoliday:'🎉 节假日',markRest:'😴 休息日',showAlsoOn:'也在以下显示'}}};
 
 function ld(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
@@ -523,7 +529,7 @@ function renderDaySectionCal(){
   const pts=calcDayScore(selectedDate);
   const hol=isHoliday(selectedDate),rest=isRestDay(selectedDate);
   const specialBadge=hol?`<span style="font-size:13px;padding:4px 10px;background:var(--holiday2);color:var(--holiday);border-radius:20px;"> 🎉 ${T('holiday')}</span>`:rest?`<span style="font-size:13px;padding:4px 10px;background:var(--restday2);color:var(--restday);border-radius:20px;"> 😴 ${T('restday')}</span>`:'';
-  const activeObjs=(!rest&&!hol)?objectives.filter(o=>isObjActive(o,selectedDate)):[];
+  const activeObjs=objectives.filter(o=>isObjActive(o,selectedDate));
   const calT=calTasks[selectedDate]||[];
   const defHTML=activeObjs.length?`<div class="section-lbl">${T('dailyTasks')}</div><div class="task-list">${activeObjs.map(o=>taskItemHTML('def',o,selectedDate)).join('')}</div>`:'';
   const calHTML=calT.length?`<div class="section-lbl">${T('thisDay')}</div><div class="task-list">${calT.map(t=>taskItemHTML('cal',t,selectedDate)).join('')}</div>`:'';
@@ -547,10 +553,16 @@ function addCalTask(){const inp=document.getElementById('taskInput');const text=
 function delCalTask(id,date){if(!calTasks[date])return;calTasks[date]=calTasks[date].filter(t=>t.id!==id);persist();renderAll();}
 
 // ── OBJECTIVES ──
-function isObjActive(o,date){const d=parseKey(date);const dow=(d.getDay()+6)%7;return o.days.includes(dow);}
+function isObjActive(o,date){
+  const d=parseKey(date);const dow=(d.getDay()+6)%7;
+  if(!o.days.includes(dow))return false;
+  if(isHoliday(date)&&o.showOnHoliday===false)return false;
+  if(isRestDay(date)&&o.showOnRest===false)return false;
+  return true;
+}
 function calcDayScore(date){
-  if(isHoliday(date)||isRestDay(date))return 0;
-  const active=objectives.filter(o=>isObjActive(o,date));const calT=calTasks[date]||[];const total=active.length+calT.length;
+  const active=objectives.filter(o=>isObjActive(o,date));
+  const calT=calTasks[date]||[];const total=active.length+calT.length;
   if(!total)return 0;const ptsEach=100/total;
   const doneCount=active.filter(o=>isDone('def',o.id,date)).length+calT.filter(t=>isDone('cal',t.id,date)).length;
   return Math.round(doneCount*ptsEach);
@@ -580,10 +592,10 @@ function renderObjList(){
   document.getElementById('objScoreFill').style.width=pts+'%';
   document.getElementById('objScoreLbl').textContent='/ 100 pts';
   const hol=isHoliday(selectedDate),rest=isRestDay(selectedDate);
-  const activeObjs=(!rest&&!hol)?objectives.filter(o=>isObjActive(o,selectedDate)):[];
+  const activeObjs=objectives.filter(o=>isObjActive(o,selectedDate));
   const calT=calTasks[selectedDate]||[];
   let html='';
-  if(hol||rest){
+  if((hol||rest)&&!activeObjs.length&&!calT.length){
     html=`<div class="empty-state" style="font-size:32px;padding:20px 0;">${hol?'🎉':'😴'}<br><span style="font-size:16px;margin-top:8px;display:block;">${hol?T('holiday'):T('restday')}</span></div>`;
   } else {
     if(activeObjs.length){
@@ -631,13 +643,58 @@ function moveObj(id,dir){
   persist();renderAll();
 }
 
-function openNewObj(){editingObjId=null;document.getElementById('editModalTitle').textContent=T('newObj');document.getElementById('editModalInput').value='';document.getElementById('editModalInput').placeholder=T('objName');renderEditDays([0,1,2,3,4,5,6]);document.getElementById('editModalDaysLabel').textContent=T('activeDays');document.getElementById('deselectAllBtn').textContent=T('deselectAll');document.getElementById('modalCancelBtn').textContent=T('cancel');document.getElementById('modalSaveBtn').textContent=T('save');document.getElementById('editModal').classList.remove('hidden');}
-function openEditObj(id){editingObjId=id;const o=objectives.find(x=>x.id===id);if(!o)return;document.getElementById('editModalTitle').textContent=T('editObj');document.getElementById('editModalInput').value=o.text;document.getElementById('editModalInput').placeholder=T('objName');renderEditDays(o.days);document.getElementById('editModalDaysLabel').textContent=T('activeDays');document.getElementById('deselectAllBtn').textContent=T('deselectAll');document.getElementById('modalCancelBtn').textContent=T('cancel');document.getElementById('modalSaveBtn').textContent=T('save');document.getElementById('editModal').classList.remove('hidden');}
-function renderEditDays(active){const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];document.getElementById('editModalDays').innerHTML=dow.map((d,i)=>`<button class="day-toggle${active.includes(i)?' on':''}" onclick="toggleEditDay(${i})">${T(d)}</button>`).join('');}
-function toggleEditDay(i){document.querySelectorAll('.day-toggle')[i].classList.toggle('on');}
-function deselectAllDays(){document.querySelectorAll('.day-toggle').forEach(b=>b.classList.remove('on'));}
+function openNewObj(){
+  editingObjId=null;
+  document.getElementById('editModalTitle').textContent=T('newObj');
+  document.getElementById('editModalInput').value='';
+  document.getElementById('editModalInput').placeholder=T('objName');
+  renderEditDays([0,1,2,3,4,5,6]);
+  document.getElementById('editModalDaysLabel').textContent=T('activeDays');
+  document.getElementById('deselectAllBtn').textContent=T('deselectAll');
+  document.getElementById('modalCancelBtn').textContent=T('cancel');
+  document.getElementById('modalSaveBtn').textContent=T('save');
+  document.getElementById('editModalSpecialLabel').textContent=T('showAlsoOn');
+  document.getElementById('toggleHoliday').classList.add('on');
+  document.getElementById('toggleRestday').classList.add('on');
+  document.getElementById('editModal').classList.remove('hidden');
+}
+function openEditObj(id){
+  editingObjId=id;
+  const o=objectives.find(x=>x.id===id);if(!o)return;
+  document.getElementById('editModalTitle').textContent=T('editObj');
+  document.getElementById('editModalInput').value=o.text;
+  document.getElementById('editModalInput').placeholder=T('objName');
+  renderEditDays(o.days);
+  document.getElementById('editModalDaysLabel').textContent=T('activeDays');
+  document.getElementById('deselectAllBtn').textContent=T('deselectAll');
+  document.getElementById('modalCancelBtn').textContent=T('cancel');
+  document.getElementById('modalSaveBtn').textContent=T('save');
+  document.getElementById('editModalSpecialLabel').textContent=T('showAlsoOn');
+  document.getElementById('toggleHoliday').classList.toggle('on', o.showOnHoliday!==false);
+  document.getElementById('toggleRestday').classList.toggle('on', o.showOnRest!==false);
+  document.getElementById('editModal').classList.remove('hidden');
+}
+function renderEditDays(active){
+  const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.getElementById('editModalDays').innerHTML=dow.map((d,i)=>`<button class="day-toggle${active.includes(i)?' on':''}" onclick="toggleEditDay(${i})">${T(d)}</button>`).join('');
+}
+function toggleEditDay(i){document.querySelectorAll('#editModalDays .day-toggle')[i].classList.toggle('on');}
+function deselectAllDays(){document.querySelectorAll('#editModalDays .day-toggle').forEach(b=>b.classList.remove('on'));}
 function closeEditModal(){document.getElementById('editModal').classList.add('hidden');editingObjId=null;}
-function saveEditModal(){const text=document.getElementById('editModalInput').value.trim();if(!text){closeEditModal();return;}const days=[...document.querySelectorAll('.day-toggle')].map((b,i)=>b.classList.contains('on')?i:-1).filter(x=>x>=0);if(editingObjId){const o=objectives.find(x=>x.id===editingObjId);if(o){o.text=text;o.days=days.length?days:[0,1,2,3,4,5,6];}}else{objectives.push({id:'o'+Date.now(),text,days:days.length?days:[0,1,2,3,4,5,6]});}closeEditModal();persist();renderAll();}
+function saveEditModal(){
+  const text=document.getElementById('editModalInput').value.trim();
+  if(!text){closeEditModal();return;}
+  const days=[...document.querySelectorAll('#editModalDays .day-toggle')].map((b,i)=>b.classList.contains('on')?i:-1).filter(x=>x>=0);
+  const showOnHoliday=document.getElementById('toggleHoliday').classList.contains('on');
+  const showOnRest=document.getElementById('toggleRestday').classList.contains('on');
+  if(editingObjId){
+    const o=objectives.find(x=>x.id===editingObjId);
+    if(o){o.text=text;o.days=days.length?days:[0,1,2,3,4,5,6];o.showOnHoliday=showOnHoliday;o.showOnRest=showOnRest;}
+  }else{
+    objectives.push({id:'o'+Date.now(),text,days:days.length?days:[0,1,2,3,4,5,6],showOnHoliday,showOnRest});
+  }
+  closeEditModal();persist();renderAll();
+}
 function delObj(id){objectives=objectives.filter(o=>o.id!==id);persist();renderAll();}
 
 // ── STATS ──
@@ -674,5 +731,6 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.se
   else{document.getElementById('langScreen').classList.add('hidden');launchApp();}
 })();
 </script>
+
 </body>
 </html>
